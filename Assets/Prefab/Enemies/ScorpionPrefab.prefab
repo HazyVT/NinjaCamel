@@ -4854,7 +4854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8008735598019484678}
   - component: {fileID: 5336009783717461341}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: scorpion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5006,7 +5006,6 @@ MonoBehaviour:
   dust: {fileID: 3127719926845888330}
   health: 10
   xpPrefab: {fileID: 9101276941936895679, guid: 2330f618e7fcb7a4389e1a8734d5627b, type: 3}
-  healthPrefab: {fileID: 1950323358697698075, guid: 0f421a03de9164e498d09ab2e166f691, type: 3}
   sr: {fileID: 5336009783717461341}
 --- !u!61 &7394413745997008562
 BoxCollider2D:

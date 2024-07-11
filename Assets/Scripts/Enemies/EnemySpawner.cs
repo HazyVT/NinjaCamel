@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject[] enemyArray;
     //public GameObject enemyChoiceOne;
     //public GameObject enemyChoiceTwo;
-    private float timeInterval = 0.5f;
+    private float timeInterval = 0.7f;
     private float totalTime = 0;
     public Joystick joystick;
 

@@ -42,7 +42,7 @@ MonoBehaviour:
     value: 0
   dirtTexture:
     overrideState: 1
-    value: {fileID: 2800000, guid: a4e6f4f55686b447381cdd9fceed1015, type: 3}
+    value: {fileID: 2800000, guid: 5b56d9fa0e8bd6e409ed188db38a692c, type: 3}
     defaultState: 1
   dirtIntensity:
     overrideState: 1
