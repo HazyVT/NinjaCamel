@@ -5006,8 +5006,9 @@ MonoBehaviour:
   dust: {fileID: 3127719926845888330}
   health: 10
   xpPrefab: {fileID: 9101276941936895679, guid: 2330f618e7fcb7a4389e1a8734d5627b, type: 3}
-  healthPrefab: {fileID: 1950323358697698075, guid: 0f421a03de9164e498d09ab2e166f691, type: 3}
   sr: {fileID: 5336009783717461341}
+  hit10: {fileID: 4353975071402277505, guid: 380a9a2cfd2584ce8ae71ea9d336febc, type: 3}
+  hit20: {fileID: 8745750100451232377, guid: 3f8a96ad635e2431283860577a5291e4, type: 3}
 --- !u!61 &7394413745997008562
 BoxCollider2D:
   m_ObjectHideFlags: 0

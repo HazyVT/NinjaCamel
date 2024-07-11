@@ -16,6 +16,9 @@ public class EnemyBehaviour : MonoBehaviour
     private Rigidbody2D rb;
     private GameObject holder;
 
+    public GameObject hit10;
+    public GameObject hit20;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +77,7 @@ public class EnemyBehaviour : MonoBehaviour
     public void OnOrbitHit(int reduction)
     {
         health -= reduction;
+        Instantiate(hit10, transform.position, Quaternion.identity);
 
         if (health <= 0)
         {
@@ -96,6 +100,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         health -= reduction;
         transform.localScale = new(1.4f, 1.4f, 1f);
+        Instantiate(hit10, transform.position, Quaternion.identity);
 
         if (health <= 0)
         {

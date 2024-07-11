@@ -115,7 +115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 9
-  damage: 30
+  damage: 10
+  Hit10: {fileID: 4353975071402277505, guid: 380a9a2cfd2584ce8ae71ea9d336febc, type: 3}
+  Hit20: {fileID: 8745750100451232377, guid: 3f8a96ad635e2431283860577a5291e4, type: 3}
 --- !u!222 &505176831072647356
 CanvasRenderer:
   m_ObjectHideFlags: 0
