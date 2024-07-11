@@ -26,9 +26,9 @@ public class PauseHandler : MonoBehaviour
     void Start()
     {
         created = false;
-        Globals.hasChakram = false;
+        Globals.hasChakram = true;
         Globals.hasMelee = false;
-        Globals.chakramLevel = 0;
+        Globals.chakramLevel = 1;
         Globals.meleeLevel = 0;
         ExperienceManager.ResetExperienceManager();
         WaveManager.wave = 1;
