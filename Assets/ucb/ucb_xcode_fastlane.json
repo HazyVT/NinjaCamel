@@ -1,0 +1,7 @@
+{
+    "fastfile": "Assets/ucb/Fastfile2",
+    "lanes": {
+        "pre_build": "UpdateInfoPlist",
+        "post_build": "UploadToTestflight"
+    }
+}
