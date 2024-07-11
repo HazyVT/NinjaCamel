@@ -32,6 +32,8 @@ public class PauseHandler : MonoBehaviour
         Globals.meleeLevel = 0;
         ExperienceManager.ResetExperienceManager();
         WaveManager.wave = 1;
+        Globals.shurikenFireSpeed = 2;
+        Globals.shurikenLevel = 1;
     }
 
     // Update is called once per frame
