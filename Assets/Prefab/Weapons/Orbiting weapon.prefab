@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3845055186174624014}
   - component: {fileID: 2243882229146350538}
-  - component: {fileID: 1831559951091520894}
   m_Layer: 6
   m_Name: Circle
   m_TagString: Untagged
@@ -71,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1586593917
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a4e6f4f55686b447381cdd9fceed1015, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -85,23 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1831559951091520894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1039786911624399989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 228bc4fdfdc4e4ba0a3a5b028b3694e5, type: 2}
-  isGlobal: 0
-  blendDistance: 0
-  weight: 0.251
-  priority: 0
 --- !u!1 &2977607410841879412
 GameObject:
   m_ObjectHideFlags: 0
