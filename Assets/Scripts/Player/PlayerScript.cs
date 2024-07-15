@@ -42,6 +42,9 @@ public class PlayerScript : MonoBehaviour
     private float deathDuration = 1;
     private bool particleHasPlayed = false;
 
+    private float maxX = 30;
+    private float minX = -30;
+
     // Start is called before the first frame update
     void Start()
     {
