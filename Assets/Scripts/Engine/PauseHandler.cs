@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,11 +17,14 @@ public class PauseHandler : MonoBehaviour
     public GameObject[] weaponImages;
     public GameObject weaponImageHolder;
 
-    public GameObject textDescription;
+    public GameObject descriptionHolder;
+    public Text textDescription;
+    public GameObject chooseButton;
 
     public GameObject player;
 
     private static bool created;
+    private string chosen = "shuriken";
 
     private string[] weapons = { "shuriken", "chakram", "melee"};
 
@@ -50,7 +54,10 @@ public class PauseHandler : MonoBehaviour
             weaponImages[1].GetComponent<Image>().sprite = chakramImage;
             weaponImages[2].GetComponent<Image>().sprite = swordImage;
 
-            textDescription.SetActive(true);
+            OnShurikenLevelUp();
+            descriptionHolder.SetActive(true);
+
+            chooseButton.SetActive(true);
             
             weaponImageHolder.SetActive(true);
 
@@ -65,7 +72,8 @@ public class PauseHandler : MonoBehaviour
             case 1:
             case 3:
             case 5:
-                Globals.shurikenFireSpeed -= 0.4f;
+                textDescription.text = "Reduce shuriken attack speed by 40%";
+                chosen = "shuriken";
                 break;
             case 2:
                 player.GetComponent<PlayerScript>().bulletPrefab.transform.localScale = new(1.7f, 1.7f);
@@ -82,11 +90,13 @@ public class PauseHandler : MonoBehaviour
                 break;
         }
 
+        /*
         screenDim.SetActive(false);
         weaponImageHolder.SetActive(false);
         Globals.shurikenLevel++;
         ExperienceManager.isLeveling = false;
         created = false;
+        */
 
     }
 
@@ -96,7 +106,8 @@ public class PauseHandler : MonoBehaviour
         switch (Globals.chakramLevel)
         {
             case 0:
-                Globals.hasChakram = true;
+                textDescription.text = "Gain a chakram that spins around you";
+                chosen = "chakram";
                 break;
             case 1:
 
@@ -104,11 +115,13 @@ public class PauseHandler : MonoBehaviour
                 break;
         }
 
+        /*
         screenDim.SetActive(false);
         weaponImageHolder.SetActive(false);
         Globals.chakramLevel++;
         ExperienceManager.isLeveling = false;
         created = false;
+        */
     }
 
     public void OnMeleeLevelUp()
@@ -116,14 +129,17 @@ public class PauseHandler : MonoBehaviour
         switch (Globals.meleeLevel)
         {
             case 0:
-                Globals.hasMelee = true;
+                textDescription.text = "Gain a melee attack that attacks in front of you";
+                chosen = "melee";
                 break;
         }
 
+        /*
         screenDim.SetActive(false);
         weaponImageHolder.SetActive(false);
         Globals.meleeLevel++;
         ExperienceManager.isLeveling = false;
         created = false;
+        */
     }
 }
