@@ -766,7 +766,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 267411866}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 713844984}
+        m_TargetAssemblyTypeName: PauseHandler, Assembly-CSharp
+        m_MethodName: ChosenButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &267411866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1883,6 +1895,7 @@ MonoBehaviour:
   weaponImageHolder: {fileID: 213306298}
   descriptionHolder: {fileID: 2112804670}
   textDescription: {fileID: 102863179}
+  chooseButton: {fileID: 267411863}
   player: {fileID: 1015434068}
 --- !u!4 &713844985
 Transform:

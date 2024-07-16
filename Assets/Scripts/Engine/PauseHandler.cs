@@ -74,6 +74,9 @@ public class PauseHandler : MonoBehaviour
             case 5:
                 textDescription.text = "Reduce shuriken attack speed by 40%";
                 chosen = "shuriken";
+                weaponImages[0].transform.localScale = new(1.5f, 1.5f, 1f);
+                weaponImages[1].transform.localScale = new(1,1,1);
+                weaponImages[2].transform.localScale = new(1,1,1);
                 break;
             case 2:
                 player.GetComponent<PlayerScript>().bulletPrefab.transform.localScale = new(1.7f, 1.7f);
@@ -108,6 +111,9 @@ public class PauseHandler : MonoBehaviour
             case 0:
                 textDescription.text = "Gain a chakram that spins around you";
                 chosen = "chakram";
+                weaponImages[1].transform.localScale = new(1.5f, 1.5f, 1f);
+                weaponImages[0].transform.localScale = new(1,1,1);
+                weaponImages[2].transform.localScale = new(1,1,1);
                 break;
             case 1:
 
@@ -131,6 +137,9 @@ public class PauseHandler : MonoBehaviour
             case 0:
                 textDescription.text = "Gain a melee attack that attacks in front of you";
                 chosen = "melee";
+                weaponImages[2].transform.localScale = new(1.5f, 1.5f, 1f);
+                weaponImages[1].transform.localScale = new(1,1,1);
+                weaponImages[0].transform.localScale = new(1,1,1);
                 break;
         }
 
@@ -141,5 +150,31 @@ public class PauseHandler : MonoBehaviour
         ExperienceManager.isLeveling = false;
         created = false;
         */
+    }
+
+    public void ChosenButtonClick()
+    {
+        switch (chosen)
+        {
+            case "shuriken":
+                Globals.shurikenFireSpeed -= 0.4f;
+                break;
+            case "chakram":
+                Globals.hasChakram = true;
+                Globals.chakramLevel = 1;
+                break;
+            case "melee":
+                Globals.hasMelee = true;
+                Globals.meleeLevel = 1;
+                break;
+        }
+        
+        screenDim.SetActive(false);
+        weaponImageHolder.SetActive(false);
+        chooseButton.SetActive(false);
+        descriptionHolder.SetActive(false);
+        Globals.meleeLevel++;
+        ExperienceManager.isLeveling = false;
+        created = false;
     }
 }
