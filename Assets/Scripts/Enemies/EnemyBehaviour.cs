@@ -86,7 +86,6 @@ public class EnemyBehaviour : MonoBehaviour
             CreateDust();
             Instantiate(xpPrefab, transform.position, Quaternion.identity, holder.transform);
             Destroy(gameObject);
-            Globals.points += 10;
             sr.transform.localScale = new Vector3(0, 0, 0);
 
             ExperienceManager.ChangeExperience(10);
@@ -107,7 +106,6 @@ public class EnemyBehaviour : MonoBehaviour
         {
             CreateDust();
             Instantiate(xpPrefab, transform.position, Quaternion.identity, holder.transform);
-            Globals.points += 10;
             Destroy(gameObject);
             sr.transform.localScale = new Vector3(0, 0, 0);
 

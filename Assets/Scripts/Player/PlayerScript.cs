@@ -42,8 +42,7 @@ public class PlayerScript : MonoBehaviour
     private float deathDuration = 1;
     private bool particleHasPlayed = false;
 
-    private float maxX = 30;
-    private float minX = -30;
+    public GameObject cameraHolder;
 
     // Start is called before the first frame update
     void Start()
@@ -78,13 +77,15 @@ public class PlayerScript : MonoBehaviour
             }
 
 
+                
             if (shake > 0)
             {
                 Vector3 shakeVector = Random.insideUnitSphere * shakeAmount;
-                Camera.main.transform.localPosition = new(shakeVector.x, shakeVector.y, -24);
+                cameraHolder.transform.localPosition = new(shakeVector.x, shakeVector.y, -24);
                 shake -= Time.deltaTime;
             } else {
                 shake = 0;
+                //Camera.main.transform.position = new(0,0,-1);
             }
 
             bulletSpawningTimeInterval = Globals.shurikenFireSpeed;
@@ -110,9 +111,20 @@ public class PlayerScript : MonoBehaviour
 
                 if (bulletSpawnDuration <= 0)
                 {
-                    Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
-                    bulletSpawnDuration = bulletSpawningTimeInterval;
-                    transform.localScale = new(1.15f, 1.15f, 1f);
+                    if (Globals.shurikenLevel == 1)
+                    {
+                        Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
+                        bulletSpawnDuration = bulletSpawningTimeInterval;
+                        transform.localScale = new(1.15f, 1.15f, 1f);
+                    } else
+                    {
+                        GameObject straightShuriken = bulletPrefab;
+                        straightShuriken.GetComponent<BulletBehaviour>().which = 0;
+                        Instantiate(straightShuriken, transform.position, Quaternion.identity, bulletHolder.transform);
+                        bulletSpawnDuration = bulletSpawningTimeInterval;
+                        transform.localScale = new(1.15f, 1.15f, 1f);
+                    }
+                    
                 }
 
                 if (Globals.hasMelee)

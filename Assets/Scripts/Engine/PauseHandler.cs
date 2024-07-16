@@ -16,6 +16,8 @@ public class PauseHandler : MonoBehaviour
     public GameObject[] weaponImages;
     public GameObject weaponImageHolder;
 
+    public GameObject textDescription;
+
     public GameObject player;
 
     private static bool created;
@@ -47,6 +49,8 @@ public class PauseHandler : MonoBehaviour
             weaponImages[0].GetComponent<Image>().sprite = shurikenImage;
             weaponImages[1].GetComponent<Image>().sprite = chakramImage;
             weaponImages[2].GetComponent<Image>().sprite = swordImage;
+
+            textDescription.SetActive(true);
             
             weaponImageHolder.SetActive(true);
 
@@ -61,7 +65,7 @@ public class PauseHandler : MonoBehaviour
             case 1:
             case 3:
             case 5:
-                Globals.shurikenFireSpeed -= 0.3f;
+                Globals.shurikenFireSpeed -= 0.4f;
                 break;
             case 2:
                 player.GetComponent<PlayerScript>().bulletPrefab.transform.localScale = new(1.7f, 1.7f);

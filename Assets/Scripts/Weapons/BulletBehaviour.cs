@@ -6,6 +6,8 @@ public class BulletBehaviour : MonoBehaviour
     public float speed;
     public int damage;
 
+    public int which;
+
     private GameObject closestEnemy;
     private Vector3 movementVector;
 
@@ -22,28 +24,33 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (!ExperienceManager.isLeveling)
         {
-
-            //float xscale = Utilities.Approach(transform.localScale.x, 1, 2 * Time.deltaTime);
-            //float yscale = Utilities.Approach(transform.localScale.y, 1, 2 * Time.deltaTime);
-
-            //transform.localScale = new(xscale, yscale, 1);
-
-            
-            if (closestEnemy != null)
+            if (Globals.shurikenLevel == 1)
             {
-                transform.position = Vector3.MoveTowards(transform.position, closestEnemy.transform.position, speed * Time.deltaTime);
-            }
-            else
-            {
-                float xpos = Utilities.Approach(transform.position.x, movementVector.x + transform.position.x, speed * Time.deltaTime);
-                float ypos = Utilities.Approach(transform.position.y, movementVector.y + transform.position.y, speed * Time.deltaTime);
-                transform.position = new(xpos, ypos, transform.position.z);
-
-                Vector3 camerapos = Camera.main.transform.position;
-                if (transform.position.x <= camerapos.x - 10 || transform.position.x >= camerapos.x + 10 || transform.position.y <= camerapos.y - 18 || transform.position.y >= camerapos.y + 18)
+                if (closestEnemy != null)
                 {
-                    Destroy(gameObject);
+                    transform.position = Vector3.MoveTowards(transform.position, closestEnemy.transform.position, speed * Time.deltaTime);
                 }
+                else
+                {
+                    float xpos = Utilities.Approach(transform.position.x, movementVector.x + transform.position.x, speed * Time.deltaTime);
+                    float ypos = Utilities.Approach(transform.position.y, movementVector.y + transform.position.y, speed * Time.deltaTime);
+                    transform.position = new(xpos, ypos, transform.position.z);
+                }
+            } else
+            {
+                switch (which)
+                {
+                    case 0:
+                        float xpos = Utilities.Approach(transform.position.x, transform.position.x + 30, speed * Time.deltaTime);
+                        transform.position = new(xpos, transform.position.y, transform.position.z);
+                        break;
+                }
+            }
+            
+            Vector3 camerapos = Camera.main.transform.position;
+            if (transform.position.x <= camerapos.x - 10 || transform.position.x >= camerapos.x + 10 || transform.position.y <= camerapos.y - 18 || transform.position.y >= camerapos.y + 18)
+            {
+                Destroy(gameObject);
             }
 
             transform.Rotate(new Vector3(0, 0, 1));

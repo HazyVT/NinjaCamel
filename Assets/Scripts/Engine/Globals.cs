@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Globals
 {
-    public static float shurikenFireSpeed = 2;
     public static bool hasMelee = false;
     public static bool hasChakram = false;
 
@@ -12,5 +11,8 @@ public class Globals
     public static int meleeLevel = 0;
     public static int chakramLevel = 0;
 
-    public static int points = 0;
+    // Item variables
+    public static float shurikenFireSpeed = 2;
+    public static float shurikenSize;
+
 }
