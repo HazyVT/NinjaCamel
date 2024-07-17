@@ -1880,9 +1880,15 @@ MonoBehaviour:
   - {fileID: 1759043816}
   - {fileID: 1601504796}
   - {fileID: 1481108476}
-  enemyArray:
+  waveOneEnemyArray:
   - {fileID: 9121386409375366734, guid: 950dd0613c8bc41c4a7b54e20dc088c3, type: 3}
   - {fileID: 9121386409375366734, guid: 9166153d6de6649868c91d7ef8acb839, type: 3}
+  waveTwoEnemyArray:
+  - {fileID: 9121386409375366734, guid: 9166153d6de6649868c91d7ef8acb839, type: 3}
+  - {fileID: 9121386409375366734, guid: 0f3def227267b534a9d295e06d4d966e, type: 3}
+  waveThreeEnemyArray:
+  - {fileID: 9121386409375366734, guid: 6330e4af6a6357b4cb80111ac3bc8e74, type: 3}
+  - {fileID: 9121386409375366734, guid: 0f3def227267b534a9d295e06d4d966e, type: 3}
   joystick: {fileID: 2076336384}
 --- !u!1 &485273166
 GameObject:

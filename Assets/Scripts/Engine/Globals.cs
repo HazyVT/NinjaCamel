@@ -14,8 +14,9 @@ public class Globals
     // Item variables
     public static float shurikenFireSpeed = 2;
     public static float shurikenSize;
+    public static int shurikenDamage = 10;
 
     public static float orbitSpeed = 50.0f;
-    
+
 
 }

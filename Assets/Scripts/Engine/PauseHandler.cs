@@ -124,7 +124,7 @@ public class PauseHandler : MonoBehaviour
             case "shuriken":
                 switch (Globals.shurikenLevel) {
                     case 1:
-                        Globals.shurikenFireSpeed -= 0.4f;
+                        Globals.shurikenFireSpeed -= 0.5f;
                         break;
                     case 2:
                         break;

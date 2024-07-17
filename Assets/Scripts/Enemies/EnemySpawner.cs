@@ -8,7 +8,12 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject enemyHolder;
     public GameObject[] spawnPointArray;
-    public GameObject[] enemyArray;
+    private GameObject[] enemyArray;
+
+    public GameObject[] waveOneEnemyArray;
+    public GameObject[] waveTwoEnemyArray;
+    public GameObject[] waveThreeEnemyArray;
+
     //public GameObject enemyChoiceOne;
     //public GameObject enemyChoiceTwo;
     private float timeInterval = 0.7f;
@@ -24,6 +29,8 @@ public class EnemySpawner : MonoBehaviour
     {
         fullTime = (timeInterval / WaveManager.wave);
         duration = fullTime;
+        enemyArray = waveOneEnemyArray;
+
     }
 
     // Update is called once per frame
@@ -31,6 +38,19 @@ public class EnemySpawner : MonoBehaviour
     {
         //float waveTime = WaveManager.wave / 2;
         fullTime = timeInterval;
+
+        switch (WaveManager.wave)
+        {
+            case 1:
+                enemyArray = waveOneEnemyArray;
+                break;
+            case 2:
+                enemyArray = waveTwoEnemyArray;
+                break;
+            case 3:
+                enemyArray = waveThreeEnemyArray;
+                break;
+        }
 
         if (!ExperienceManager.isLeveling)
         {
@@ -41,13 +61,13 @@ public class EnemySpawner : MonoBehaviour
 
             if (duration <= 0)
             {
-                int randomEnemyChoice = Random.Range(0, enemyArray.Length);
-                GameObject toSpawn = enemyArray[randomEnemyChoice];
-                GameObject spawnPoint = FindSpawnPoint();
-
                 for (int i = 0; i < WaveManager.wave; i++)
                 {
-                    Instantiate(toSpawn, spawnPoint.transform.position, Quaternion.identity, enemyHolder.transform);
+                    int randomEnemyChoice = Random.Range(0, enemyArray.Length);
+                    GameObject toSpawn = enemyArray[randomEnemyChoice];
+                    GameObject spawnPoint = FindSpawnPoint();
+                    Vector3 spawnPosition = new(spawnPoint.transform.position.x + (Random.insideUnitSphere.x * 4), spawnPoint.transform.position.y + (Random.insideUnitSphere.y * 4), spawnPoint.transform.position.z);
+                    Instantiate(toSpawn, spawnPosition, Quaternion.identity, enemyHolder.transform);
                 }
 
                 duration = fullTime;
