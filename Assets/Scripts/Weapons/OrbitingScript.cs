@@ -4,7 +4,7 @@ public class OrbitingWeapon : MonoBehaviour
 {
     public Transform player;
     public float orbitDistance = 2.0f;
-    public float orbitSpeed = 50.0f;
+    public float orbitSpeed;
     public int damage;
 
     private Rigidbody2D rb;
@@ -18,10 +18,12 @@ public class OrbitingWeapon : MonoBehaviour
         {
             Debug.LogError("Player transform not assigned.");
         }
+        orbitSpeed = Globals.orbitSpeed;
     }
 
     void FixedUpdate()
     {
+        orbitSpeed = Globals.orbitSpeed;
         if (player != null && !ExperienceManager.isLeveling)
         {
             OrbitAroundPlayer();

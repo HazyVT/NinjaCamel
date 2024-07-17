@@ -151,13 +151,22 @@ public class PlayerScript : MonoBehaviour
                     }
                 }
 
-                if (Globals.hasChakram && spawnedOrbit == false)
+                switch (Globals.chakramLevel)
                 {
-                    print("Spawn");
-                    orbitWeapon.GetComponent<OrbitingWeapon>().player = gameObject.transform;
-                    Instantiate(orbitWeapon, transform.position, Quaternion.identity);
-                    spawnedOrbit = true;
+                    case 1:
+                        if (Globals.hasChakram && spawnedOrbit == false)
+                        {
+                            print("Spawn");
+                            orbitWeapon.GetComponent<OrbitingWeapon>().player = gameObject.transform;
+                            Instantiate(orbitWeapon, transform.position, Quaternion.identity);
+                            spawnedOrbit = true;
+                        }
+                        break;
+                    case 2:
+                        break;
                 }
+
+                
             }
 
             if (!particleHasPlayed) 

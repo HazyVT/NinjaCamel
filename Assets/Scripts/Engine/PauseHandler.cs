@@ -73,7 +73,7 @@ public class PauseHandler : MonoBehaviour
                 textDescription.text = "Increase shuriken attack speed by 40%";
                 break;
             case 2:
-                textDescription.text = "Fire two shurikens in your facing direction";
+                textDescription.text = "Fire three shurikens in your facing direction";
                 break;
         }
 
@@ -81,15 +81,6 @@ public class PauseHandler : MonoBehaviour
         weaponImages[0].transform.localScale = new(1.5f, 1.5f, 1f);
         weaponImages[1].transform.localScale = new(1,1,1);
         weaponImages[2].transform.localScale = new(1,1,1);
-
-        /*
-        screenDim.SetActive(false);
-        weaponImageHolder.SetActive(false);
-        Globals.shurikenLevel++;
-        ExperienceManager.isLeveling = false;
-        created = false;
-        */
-
     }
 
     public void OnChakramLevelUp() 
@@ -99,20 +90,16 @@ public class PauseHandler : MonoBehaviour
         {
             case 0:
                 textDescription.text = "Gain a chakram that spins around you";
-                chosen = "chakram";
-                weaponImages[1].transform.localScale = new(1.5f, 1.5f, 1f);
-                weaponImages[0].transform.localScale = new(1,1,1);
-                weaponImages[2].transform.localScale = new(1,1,1);
+                break;
+            case 1:
+                textDescription.text = "Increase chakram speed";
                 break;
         }
 
-        /*
-        screenDim.SetActive(false);
-        weaponImageHolder.SetActive(false);
-        Globals.chakramLevel++;
-        ExperienceManager.isLeveling = false;
-        created = false;
-        */
+        chosen = "chakram";
+        weaponImages[1].transform.localScale = new(1.5f, 1.5f, 1f);
+        weaponImages[0].transform.localScale = new(1,1,1);
+        weaponImages[2].transform.localScale = new(1,1,1);
     }
 
     public void OnMeleeLevelUp()
@@ -121,20 +108,13 @@ public class PauseHandler : MonoBehaviour
         {
             case 0:
                 textDescription.text = "Gain a melee attack that attacks in front of you";
-                chosen = "melee";
-                weaponImages[2].transform.localScale = new(1.5f, 1.5f, 1f);
-                weaponImages[1].transform.localScale = new(1,1,1);
-                weaponImages[0].transform.localScale = new(1,1,1);
                 break;
         }
 
-        /*
-        screenDim.SetActive(false);
-        weaponImageHolder.SetActive(false);
-        Globals.meleeLevel++;
-        ExperienceManager.isLeveling = false;
-        created = false;
-        */
+        chosen = "melee";
+        weaponImages[2].transform.localScale = new(1.5f, 1.5f, 1f);
+        weaponImages[1].transform.localScale = new(1,1,1);
+        weaponImages[0].transform.localScale = new(1,1,1);
     }
 
     public void ChosenButtonClick()
@@ -153,8 +133,16 @@ public class PauseHandler : MonoBehaviour
                 Globals.shurikenLevel++;
                 break;
             case "chakram":
-                Globals.hasChakram = true;
-                Globals.chakramLevel = 1;
+                switch (Globals.chakramLevel)
+                {
+                    case 0:
+                        Globals.hasChakram = true;
+                        break;
+                    case 1:
+                        Globals.orbitSpeed = 100f;
+                        break;
+                }
+                Globals.chakramLevel++;
                 break;
             case "melee":
                 Globals.hasMelee = true;
