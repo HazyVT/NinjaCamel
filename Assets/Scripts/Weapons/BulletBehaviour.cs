@@ -7,6 +7,7 @@ public class BulletBehaviour : MonoBehaviour
     public int damage;
 
     public int which;
+    public float facing;
 
     private GameObject closestEnemy;
     private Vector3 movementVector;
@@ -24,7 +25,7 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (!ExperienceManager.isLeveling)
         {
-            if (Globals.shurikenLevel == 1)
+            if (Globals.shurikenLevel == 1 || Globals.shurikenLevel == 2)
             {
                 if (closestEnemy != null)
                 {
@@ -38,11 +39,22 @@ public class BulletBehaviour : MonoBehaviour
                 }
             } else
             {
+                print("New");
                 switch (which)
                 {
                     case 0:
-                        float xpos = Utilities.Approach(transform.position.x, transform.position.x + 30, speed * Time.deltaTime);
-                        transform.position = new(xpos, transform.position.y, transform.position.z);
+                        float _xpos = Utilities.Approach(transform.position.x, transform.position.x + (30 * facing), speed * Time.deltaTime);
+                        transform.position = new(_xpos, transform.position.y, transform.position.z);
+                        break;
+                    case 1:
+                        float _xpos2 = Utilities.Approach(transform.position.x, transform.position.x + (30 * facing), speed * Time.deltaTime);
+                        float _ypos2 = Utilities.Approach(transform.position.y, transform.position.y + 2 * Time.deltaTime, speed * Time.deltaTime);
+                        transform.position = new(_xpos2, _ypos2, transform.position.z);
+                        break;
+                    case 2:
+                        float _xpos3 = Utilities.Approach(transform.position.x, transform.position.x + (30 * facing), speed * Time.deltaTime);
+                        float _ypos3 = Utilities.Approach(transform.position.y, transform.position.y - 2 * Time.deltaTime, speed * Time.deltaTime);
+                        transform.position = new(_xpos3, _ypos3, transform.position.z);
                         break;
                 }
             }
@@ -53,7 +65,7 @@ public class BulletBehaviour : MonoBehaviour
                 Destroy(gameObject);
             }
 
-            transform.Rotate(new Vector3(0, 0, 1));
+            transform.Rotate(new Vector3(0, 0, 40));
         }
     }
 

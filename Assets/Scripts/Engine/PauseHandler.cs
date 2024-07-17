@@ -70,28 +70,17 @@ public class PauseHandler : MonoBehaviour
     {
         switch (Globals.shurikenLevel) {
             case 1:
-            case 3:
-            case 5:
-                textDescription.text = "Reduce shuriken attack speed by 40%";
-                chosen = "shuriken";
-                weaponImages[0].transform.localScale = new(1.5f, 1.5f, 1f);
-                weaponImages[1].transform.localScale = new(1,1,1);
-                weaponImages[2].transform.localScale = new(1,1,1);
+                textDescription.text = "Increase shuriken attack speed by 40%";
                 break;
             case 2:
-                player.GetComponent<PlayerScript>().bulletPrefab.transform.localScale = new(1.7f, 1.7f);
-                player.GetComponent<PlayerScript>().bulletPrefab.GetComponent<BulletBehaviour>().damage += 5;
-                break;
-            case 4:
-                player.GetComponent<PlayerScript>().bulletPrefab.transform.localScale = new(2f, 2f);
-                player.GetComponent<PlayerScript>().bulletPrefab.GetComponent<BulletBehaviour>().damage += 5;
-                break;
-            case 6:
-                Globals.shurikenFireSpeed /= 2;
-                player.GetComponent<PlayerScript>().bulletPrefab.transform.localScale = new(2.5f, 2.5f);
-                player.GetComponent<PlayerScript>().bulletPrefab.GetComponent<BulletBehaviour>().damage += 10;
+                textDescription.text = "Fire two shurikens in your facing direction";
                 break;
         }
+
+        chosen = "shuriken";
+        weaponImages[0].transform.localScale = new(1.5f, 1.5f, 1f);
+        weaponImages[1].transform.localScale = new(1,1,1);
+        weaponImages[2].transform.localScale = new(1,1,1);
 
         /*
         screenDim.SetActive(false);
@@ -114,10 +103,6 @@ public class PauseHandler : MonoBehaviour
                 weaponImages[1].transform.localScale = new(1.5f, 1.5f, 1f);
                 weaponImages[0].transform.localScale = new(1,1,1);
                 weaponImages[2].transform.localScale = new(1,1,1);
-                break;
-            case 1:
-
-                
                 break;
         }
 
@@ -157,7 +142,15 @@ public class PauseHandler : MonoBehaviour
         switch (chosen)
         {
             case "shuriken":
-                Globals.shurikenFireSpeed -= 0.4f;
+                switch (Globals.shurikenLevel) {
+                    case 1:
+                        Globals.shurikenFireSpeed -= 0.4f;
+                        break;
+                    case 2:
+                        break;
+
+                }
+                Globals.shurikenLevel++;
                 break;
             case "chakram":
                 Globals.hasChakram = true;
@@ -173,7 +166,6 @@ public class PauseHandler : MonoBehaviour
         weaponImageHolder.SetActive(false);
         chooseButton.SetActive(false);
         descriptionHolder.SetActive(false);
-        Globals.meleeLevel++;
         ExperienceManager.isLeveling = false;
         created = false;
     }

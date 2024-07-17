@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -35,6 +36,9 @@ public class PlayerScript : MonoBehaviour
     private float shake = 0;
     private float shakeAmount = 0.7f;
 
+    private float facing = 1;
+    private int currentLevel;
+
     public GameObject orbitWeapon;
     private bool spawnedOrbit = false;
 
@@ -53,6 +57,7 @@ public class PlayerScript : MonoBehaviour
         invicDuration = invincibilityTime;
         HealthManager.health = health;
         meleeAttackDuration = meleeAttackTimeInterval;
+        currentLevel = Globals.shurikenLevel;
 
     }
 
@@ -80,7 +85,7 @@ public class PlayerScript : MonoBehaviour
                 
             if (shake > 0)
             {
-                Vector3 shakeVector = Random.insideUnitSphere * shakeAmount;
+                Vector3 shakeVector = UnityEngine.Random.insideUnitSphere * shakeAmount;
                 cameraHolder.transform.localPosition = new(shakeVector.x, shakeVector.y, -24);
                 shake -= Time.deltaTime;
             } else {
@@ -111,16 +116,23 @@ public class PlayerScript : MonoBehaviour
 
                 if (bulletSpawnDuration <= 0)
                 {
-                    if (Globals.shurikenLevel == 1)
+                    currentLevel = Globals.shurikenLevel;
+                    if (currentLevel == 1 || currentLevel == 2)
                     {
-                        Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
+                        GameObject shuriken = Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
                         bulletSpawnDuration = bulletSpawningTimeInterval;
                         transform.localScale = new(1.15f, 1.15f, 1f);
                     } else
                     {
-                        GameObject straightShuriken = bulletPrefab;
+                        GameObject straightShuriken = Instantiate(bulletPrefab, transform.position, quaternion.identity, bulletHolder.transform);
+                        GameObject topRightShuriken = Instantiate(bulletPrefab, transform.position, quaternion.identity, bulletHolder.transform);
+                        GameObject BottomLeftShuriken = Instantiate(bulletPrefab, transform.position, quaternion.identity, bulletHolder.transform);
                         straightShuriken.GetComponent<BulletBehaviour>().which = 0;
-                        Instantiate(straightShuriken, transform.position, Quaternion.identity, bulletHolder.transform);
+                        topRightShuriken.GetComponent<BulletBehaviour>().which = 1;
+                        BottomLeftShuriken.GetComponent<BulletBehaviour>().which = 2;
+                        straightShuriken.GetComponent<BulletBehaviour>().facing = facing;
+                        topRightShuriken.GetComponent<BulletBehaviour>().facing = facing;
+                        BottomLeftShuriken.GetComponent<BulletBehaviour>().facing = facing;
                         bulletSpawnDuration = bulletSpawningTimeInterval;
                         transform.localScale = new(1.15f, 1.15f, 1f);
                     }
@@ -153,6 +165,7 @@ public class PlayerScript : MonoBehaviour
                 if (joystick.Horizontal != 0)
                 {
                     horizontalVelocity = Utilities.Approach(horizontalVelocity, movementSpeed * joystick.Horizontal, accelerationSpeed);
+                    facing = Mathf.Sign(joystick.Horizontal);
                 }
                 else
                 {
