@@ -7,11 +7,13 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu;
+    public GameObject pauseMenu;
+    public GameObject screenDim;
 
     public void Pause()
     {
         pauseMenu.SetActive(true);
+        screenDim.SetActive(true);
         Time.timeScale = 0;
     }
 
@@ -26,6 +28,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenu.SetActive(false);
+        screenDim.SetActive(false);
         Time.timeScale = 1;
     }
 
