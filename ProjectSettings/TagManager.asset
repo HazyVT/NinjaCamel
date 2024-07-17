@@ -12,6 +12,7 @@ TagManager:
   - Orbit
   - Melee
   - XP
+  - Wall
   layers:
   - Default
   - TransparentFX
