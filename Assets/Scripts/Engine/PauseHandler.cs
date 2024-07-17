@@ -26,6 +26,9 @@ public class PauseHandler : MonoBehaviour
     private static bool created;
     private string chosen = "shuriken";
 
+    public GameObject healthDrop;
+    private float healthTime = 0f;
+
     private string[] weapons = { "shuriken", "chakram", "melee"};
 
     // Start is called before the first frame update
@@ -62,8 +65,23 @@ public class PauseHandler : MonoBehaviour
             weaponImageHolder.SetActive(true);
 
             created = true;
+        } else
+        {
+            // Spawn health drops
+            healthTime += Time.deltaTime;
 
+            if (healthTime >= 35f)
+            {
+                print("Dropping Health");
+                float xpos = Random.Range(Camera.main.transform.position.x - 4, Camera.main.transform.position.x + 4);
+                float ypos = Random.Range(Camera.main.transform.position.y - 6, Camera.main.transform.position.x + 6);
+                Vector3 healthDropPosition = new(xpos, ypos, 0);
+                Instantiate(healthDrop, healthDropPosition, Quaternion.identity);
+                healthTime = 0;
+            }
         }
+
+        
     }
 
     public void OnShurikenLevelUp() 

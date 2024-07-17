@@ -2474,6 +2474,7 @@ MonoBehaviour:
   textDescription: {fileID: 102863179}
   chooseButton: {fileID: 267411863}
   player: {fileID: 1015434068}
+  healthDrop: {fileID: 6993735430378832147, guid: ca1c77e3de6a04a27a272633dd9a1f32, type: 3}
 --- !u!4 &713844985
 Transform:
   m_ObjectHideFlags: 0
