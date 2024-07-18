@@ -116,6 +116,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 9
   damage: 10
+  which: 0
+  facing: 0
 --- !u!222 &505176831072647356
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -201,7 +203,7 @@ SpriteRenderer:
   m_SortingLayerID: 1586593917
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8fe7860673f564a029c6535cdef19ec2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dd5e1dfb5af10488ea7495ecee1db61f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
