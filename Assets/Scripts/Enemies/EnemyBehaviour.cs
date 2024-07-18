@@ -8,6 +8,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public float speed;
     public ParticleSystem dust;
+    public ParticleSystem hitParticle;
 
     public int health;
     public GameObject xpPrefab;
@@ -50,24 +51,6 @@ public class EnemyBehaviour : MonoBehaviour
             transform.localScale = new(xscale, yscale, 1);
         }
     }
-        /*
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Bullet"))
-        {
-            OnBulletHit(10, collision);
-        }
-        else if (collision.CompareTag("Orbit"))
-        {
-            OnOrbitHit(10);
-        }
-        else if (collision.CompareTag("Melee"))
-        {
-            OnMeleeHit(10);
-        }
-    }
-        */
-
 
     public void OnMeleeHit(int reduction)
     {
@@ -79,6 +62,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         health -= reduction;
         transform.localScale = new(1.4f, 1.4f, 1f);
+        hitParticle.Play();
         //Instantiate(hit10, transform.position, Quaternion.identity);
         SpawnInDamageText(reduction);
 
@@ -104,6 +88,13 @@ public class EnemyBehaviour : MonoBehaviour
         transform.localScale = new(1.4f, 1.4f, 1f);
         //Instantiate(hit10, transform.position, Quaternion.identity);
         SpawnInDamageText(reduction);
+
+        // Get angle between shuriken and enemy
+        float angle = Vector3.Angle(bullet.transform.position, transform.position);
+        hitParticle.transform.Rotate(new(0,0,angle * 360));
+
+        hitParticle.Play();
+
 
 
 
