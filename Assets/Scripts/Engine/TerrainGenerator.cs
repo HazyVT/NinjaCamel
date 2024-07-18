@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
 {
-    public GameObject cactus;
-
     // Start is called before the first frame update
     void Start()
     {
-        float xpos = Random.Range(-23, 23);
-        float ypos = Random.Range(19, 19);
-        Instantiate(cactus, new(xpos, ypos, 0), Quaternion.identity);
+        for (int i = 0; i < 3; i++) 
+        {
+            //
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }

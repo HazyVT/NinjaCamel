@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Globals
 {
     public static bool hasMelee = false;
@@ -17,6 +13,4 @@ public class Globals
     public static int shurikenDamage = 10;
 
     public static float orbitSpeed = 50.0f;
-
-
 }

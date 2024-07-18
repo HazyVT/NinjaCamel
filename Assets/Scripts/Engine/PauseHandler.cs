@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,8 +20,6 @@ public class PauseHandler : MonoBehaviour
     public Text textDescription;
     public GameObject chooseButton;
 
-    public GameObject player;
-
     private static bool created;
     private string chosen = "shuriken";
 
@@ -31,7 +28,6 @@ public class PauseHandler : MonoBehaviour
 
     private string[] weapons = { "shuriken", "chakram", "melee"};
 
-    // Start is called before the first frame update
     void Start()
     {
         created = false;
@@ -45,48 +41,47 @@ public class PauseHandler : MonoBehaviour
         Globals.shurikenLevel = 1;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (ExperienceManager.isLeveling && !created)
         {
-
             screenDim.SetActive(true);
 
             weaponImages[0].GetComponent<Image>().sprite = shurikenImage;
             weaponImages[1].GetComponent<Image>().sprite = chakramImage;
             weaponImages[2].GetComponent<Image>().sprite = swordImage;
 
-            OnShurikenLevelUp();
+            ShowLevelUpOptions();
             descriptionHolder.SetActive(true);
 
             chooseButton.SetActive(true);
-            
+
             weaponImageHolder.SetActive(true);
 
             created = true;
-        } else
-        {
-            // Spawn health drops
-            healthTime += Time.deltaTime;
-
-            if (healthTime >= 35f)
-            {
-                //print("Dropping Health");
-                float xpos = Random.Range(Camera.main.transform.position.x - 4, Camera.main.transform.position.x + 4);
-                float ypos = Random.Range(Camera.main.transform.position.y - 6, Camera.main.transform.position.x + 6);
-                Vector3 healthDropPosition = new(xpos, ypos, 0);
-                Instantiate(healthDrop, healthDropPosition, Quaternion.identity);
-                healthTime = 0;
-            }
         }
-
-        
     }
 
-    public void OnShurikenLevelUp() 
+    private void ShowLevelUpOptions()
     {
-        switch (Globals.shurikenLevel) {
+        switch (chosen)
+        {
+            case "shuriken":
+                OnShurikenLevelUp();
+                break;
+            case "chakram":
+                OnChakramLevelUp();
+                break;
+            case "melee":
+                OnMeleeLevelUp();
+                break;
+        }
+    }
+
+    public void OnShurikenLevelUp()
+    {
+        switch (Globals.shurikenLevel)
+        {
             case 1:
                 textDescription.text = "Increase shuriken attack speed by 40%";
                 break;
@@ -96,28 +91,20 @@ public class PauseHandler : MonoBehaviour
         }
 
         chosen = "shuriken";
-        weaponImages[0].transform.localScale = new(1.5f, 1.5f, 1f);
-        weaponImages[1].transform.localScale = new(1,1,1);
-        weaponImages[2].transform.localScale = new(1,1,1);
+        HighlightSelectedWeapon(0);
     }
 
-    public void OnChakramLevelUp() 
+    public void OnChakramLevelUp()
     {
-
         switch (Globals.chakramLevel)
         {
             case 0:
                 textDescription.text = "Gain a chakram that spins around you";
                 break;
-            case 1:
-                textDescription.text = "Increase chakram speed";
-                break;
         }
 
         chosen = "chakram";
-        weaponImages[1].transform.localScale = new(1.5f, 1.5f, 1f);
-        weaponImages[0].transform.localScale = new(1,1,1);
-        weaponImages[2].transform.localScale = new(1,1,1);
+        HighlightSelectedWeapon(1);
     }
 
     public void OnMeleeLevelUp()
@@ -127,12 +114,25 @@ public class PauseHandler : MonoBehaviour
             case 0:
                 textDescription.text = "Gain a melee attack that attacks in front of you";
                 break;
+            case 1:
+                textDescription.text = "Attack forward then backward";
+                break;
+            default:
+                textDescription.text = "Max level reached";
+                break;
         }
 
         chosen = "melee";
-        weaponImages[2].transform.localScale = new(1.5f, 1.5f, 1f);
-        weaponImages[1].transform.localScale = new(1,1,1);
-        weaponImages[0].transform.localScale = new(1,1,1);
+        HighlightSelectedWeapon(2);
+    }
+
+    private void HighlightSelectedWeapon(int index)
+    {
+        for (int i = 0; i < weaponImages.Length; i++)
+        {
+            weaponImages[i].transform.localScale = new Vector3(1, 1, 1);
+        }
+        weaponImages[index].transform.localScale = new Vector3(1.5f, 1.5f, 1f);
     }
 
     public void ChosenButtonClick()
@@ -140,39 +140,55 @@ public class PauseHandler : MonoBehaviour
         switch (chosen)
         {
             case "shuriken":
-                switch (Globals.shurikenLevel) {
-                    case 1:
-                        Globals.shurikenFireSpeed -= 0.5f;
-                        break;
-                    case 2:
-                        break;
-
-                }
-                Globals.shurikenLevel++;
+                ApplyShurikenUpgrade();
                 break;
             case "chakram":
-                switch (Globals.chakramLevel)
-                {
-                    case 0:
-                        Globals.hasChakram = true;
-                        break;
-                    case 1:
-                        Globals.orbitSpeed = 100f;
-                        break;
-                }
-                Globals.chakramLevel++;
+                ApplyChakramUpgrade();
                 break;
             case "melee":
-                Globals.hasMelee = true;
-                Globals.meleeLevel = 1;
+                ApplyMeleeUpgrade();
                 break;
         }
-        
+
         screenDim.SetActive(false);
         weaponImageHolder.SetActive(false);
         chooseButton.SetActive(false);
         descriptionHolder.SetActive(false);
         ExperienceManager.isLeveling = false;
         created = false;
+    }
+
+    private void ApplyShurikenUpgrade()
+    {
+        if (Globals.shurikenLevel < 2)
+        {
+            switch (Globals.shurikenLevel)
+            {
+                case 1:
+                    Globals.shurikenFireSpeed -= 0.4f;
+                    break;
+                case 2:
+                    break;
+            }
+            Globals.shurikenLevel++;
+        }
+    }
+
+    private void ApplyChakramUpgrade()
+    {
+        if (Globals.chakramLevel < 1)
+        {
+            Globals.hasChakram = true;
+            Globals.chakramLevel = 1;
+        }
+    }
+
+    private void ApplyMeleeUpgrade()
+    {
+        if (Globals.meleeLevel < 2)
+        {
+            Globals.meleeLevel++;
+            Globals.hasMelee = true;
+        }
     }
 }
