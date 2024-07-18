@@ -72,7 +72,7 @@ public class PauseHandler : MonoBehaviour
 
             if (healthTime >= 35f)
             {
-                print("Dropping Health");
+                //print("Dropping Health");
                 float xpos = Random.Range(Camera.main.transform.position.x - 4, Camera.main.transform.position.x + 4);
                 float ypos = Random.Range(Camera.main.transform.position.y - 6, Camera.main.transform.position.x + 6);
                 Vector3 healthDropPosition = new(xpos, ypos, 0);

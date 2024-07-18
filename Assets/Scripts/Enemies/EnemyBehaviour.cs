@@ -78,7 +78,9 @@ public class EnemyBehaviour : MonoBehaviour
     public void OnOrbitHit(int reduction)
     {
         health -= reduction;
-        Instantiate(hit10, transform.position, Quaternion.identity);
+        transform.localScale = new(1.4f, 1.4f, 1f);
+        //Instantiate(hit10, transform.position, Quaternion.identity);
+        SpawnInDamageText(reduction);
 
         if (health <= 0)
         {
@@ -100,7 +102,10 @@ public class EnemyBehaviour : MonoBehaviour
     {
         health -= reduction;
         transform.localScale = new(1.4f, 1.4f, 1f);
-        Instantiate(hit10, transform.position, Quaternion.identity);
+        //Instantiate(hit10, transform.position, Quaternion.identity);
+        SpawnInDamageText(reduction);
+
+
 
         if (health <= 0)
         {
@@ -119,6 +124,23 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void CreateDust() {
         dust.Play();
+    }
+
+    private void SpawnInDamageText(int reduction)
+    {
+        while (reduction > 0)
+        {
+            if (reduction >= 20)
+            {
+                Instantiate(hit20, transform.position, Quaternion.identity);
+                reduction -= 20;
+            } else if (reduction >= 10 && reduction < 20)
+            {
+                Instantiate(hit10, transform.position, Quaternion.identity);
+                reduction -= 10;
+            }
+        
+        }
     }
 
 }

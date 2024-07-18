@@ -2502,6 +2502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50bc6b741bd7a4e66bb13a0d796fb8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cactus: {fileID: 2176784710145859750, guid: c71bbb4f64675429ca729ef0e106eec2, type: 3}
 --- !u!1001 &731384148
 PrefabInstance:
   m_ObjectHideFlags: 0

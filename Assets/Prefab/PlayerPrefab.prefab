@@ -4974,6 +4974,7 @@ MonoBehaviour:
   meleePrefab: {fileID: 7287559712490927338, guid: be40022141b8949faaada59dd1f0d986, type: 3}
   joystick: {fileID: 0}
   sr: {fileID: 1400955637086494710}
+  shake: 0
   orbitWeapon: {fileID: 2977607410841879412, guid: d4a806de5275af848882216a9fb5dc53, type: 3}
   particleSystem: {fileID: 4897573208969839438}
   cameraHolder: {fileID: 0}

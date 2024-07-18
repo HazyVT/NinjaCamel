@@ -83,7 +83,7 @@ public class BulletBehaviour : MonoBehaviour
                 tmin = tform;
                 minDist = dist;
                 closestEnemy = enemy;
-                movementVector = (enemy.transform.position - transform.position).normalized;
+                movementVector = (enemy.transform.position - position).normalized;
             }
 
         }
@@ -95,6 +95,7 @@ public class BulletBehaviour : MonoBehaviour
         {
             collision.gameObject.GetComponent<EnemyBehaviour>().OnBulletHit(damage, gameObject);
             //transform.localScale = new(1.4f, 1.4f, 1);
+            //Destroy(gameObject);
         }
     }
 }

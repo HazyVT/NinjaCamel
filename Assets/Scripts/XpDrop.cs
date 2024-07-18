@@ -19,7 +19,10 @@ public class XP : MonoBehaviour
 
     void Update()
     {
-        AttractToPlayer();
+        if (!ExperienceManager.isLeveling)
+        {
+            AttractToPlayer();
+        }
     }
 
     void AttractToPlayer()

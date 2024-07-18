@@ -33,7 +33,7 @@ public class PlayerScript : MonoBehaviour
     public SpriteRenderer sr;
     private Rigidbody2D rb;
 
-    private float shake = 0;
+    public float shake = 0;
     private float shakeAmount = 0.7f;
 
     private float facing = 1;
@@ -226,12 +226,6 @@ public class PlayerScript : MonoBehaviour
             shake = 0.2f;
             sr.color = Color.red;
             HealthManager.changeHealth(-10);
-
-            if (HealthManager.health <= 0)
-            {
-                
-            }
-
         }
     }
 
