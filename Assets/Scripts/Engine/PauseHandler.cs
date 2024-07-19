@@ -28,7 +28,7 @@ public class PauseHandler : MonoBehaviour
     private float healthTime = 0f;
 
     private List<string> weapons = new();
-    private List<string> upgradeChoices = new();
+    public List<string> upgradeChoices = new();
 
     void Start()
     {
@@ -61,6 +61,7 @@ public class PauseHandler : MonoBehaviour
             {
                 string choice = upgrades[i];
                 Sprite image = null;
+
                 switch (choice)
                 {
                     case "shuriken":
@@ -76,20 +77,21 @@ public class PauseHandler : MonoBehaviour
                         image = sandalImage;
                         break;
                 }
+
                 if (image != null)
                 {
                     weaponImages[i].GetComponent<Image>().sprite = image;
                 }
+
             }
 
             ShowLevelUpOptions();
+            HighlightSelectedWeapon(0);
             descriptionHolder.SetActive(true);
-
             chooseButton.SetActive(true);
-
             weaponImageHolder.SetActive(true);
-
             created = true;
+
         }
     }
 
@@ -105,6 +107,9 @@ public class PauseHandler : MonoBehaviour
                 break;
             case "melee":
                 OnMeleeLevelUp();
+                break;
+            case "sandal":
+                OnSandalLevelUp();
                 break;
         }
     }
@@ -122,7 +127,7 @@ public class PauseHandler : MonoBehaviour
         }
 
         chosen = "shuriken";
-        HighlightSelectedWeapon(0);
+        //HighlightSelectedWeapon(0);
     }
 
     public void OnChakramLevelUp()
@@ -135,7 +140,7 @@ public class PauseHandler : MonoBehaviour
         }
 
         chosen = "chakram";
-        HighlightSelectedWeapon(1);
+        //HighlightSelectedWeapon(1);
     }
 
     public void OnMeleeLevelUp()
@@ -154,10 +159,16 @@ public class PauseHandler : MonoBehaviour
         }
 
         chosen = "melee";
-        HighlightSelectedWeapon(2);
+        //HighlightSelectedWeapon(2);
     }
 
-    private void HighlightSelectedWeapon(int index)
+    public void OnSandalLevelUp() 
+    {
+        textDescription.text = "Increase movement speed";
+        chosen = "sandal";
+    }
+
+    public void HighlightSelectedWeapon(int index)
     {
         for (int i = 0; i < weaponImages.Length; i++)
         {
@@ -178,6 +189,9 @@ public class PauseHandler : MonoBehaviour
                 break;
             case "melee":
                 ApplyMeleeUpgrade();
+                break;
+            case "sandal":
+                Globals.playerSpeed += 0.5f;
                 break;
         }
 

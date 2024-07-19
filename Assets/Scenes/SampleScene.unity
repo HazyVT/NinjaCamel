@@ -666,7 +666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameHandler: {fileID: 713844983}
-  type: chakram
+  number: 1
 --- !u!1 &213306298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1257,7 +1257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameHandler: {fileID: 713844983}
-  type: shuriken
+  number: 0
 --- !u!50 &347693682
 Rigidbody2D:
   serializedVersion: 4
@@ -2475,6 +2475,7 @@ MonoBehaviour:
   textDescription: {fileID: 102863179}
   chooseButton: {fileID: 267411863}
   healthDrop: {fileID: 6993735430378832147, guid: ca1c77e3de6a04a27a272633dd9a1f32, type: 3}
+  upgradeChoices: []
 --- !u!4 &713844985
 Transform:
   m_ObjectHideFlags: 0
@@ -5204,7 +5205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameHandler: {fileID: 713844983}
-  type: melee
+  number: 2
 --- !u!1 &1790451093
 GameObject:
   m_ObjectHideFlags: 0

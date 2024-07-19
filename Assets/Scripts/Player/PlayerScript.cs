@@ -55,6 +55,7 @@ public class PlayerScript : MonoBehaviour
         HealthManager.health = health;
         meleeAttackDuration = meleeAttackTimeInterval;
         currentLevel = Globals.shurikenLevel;
+        movementSpeed = Globals.playerSpeed;
     }
 
     void Update()

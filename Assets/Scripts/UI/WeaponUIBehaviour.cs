@@ -8,7 +8,8 @@ public class WeaponUIBehaviour : MonoBehaviour, IPointerDownHandler
 {
 
     public GameObject gameHandler;
-    public string type;
+    public int number;
+    private string type;
 
     // Start is called before the first frame update
     void Start()
@@ -18,12 +19,17 @@ public class WeaponUIBehaviour : MonoBehaviour, IPointerDownHandler
         {
             Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
         }
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (ExperienceManager.isLeveling)
+        {
+            type = gameHandler.GetComponent<PauseHandler>().upgradeChoices[number];
+        }
     }
 
     public void OnPointerDown(PointerEventData data)
@@ -40,6 +46,11 @@ public class WeaponUIBehaviour : MonoBehaviour, IPointerDownHandler
             case "melee":
                 gameHandler.GetComponent<PauseHandler>().OnMeleeLevelUp();
                 break;
+            case "sandal":
+                gameHandler.GetComponent<PauseHandler>().OnSandalLevelUp();
+                break;
         }
+
+        gameHandler.GetComponent<PauseHandler>().HighlightSelectedWeapon(number);
     }
 }

@@ -13,4 +13,8 @@ public class Globals
     public static int shurikenDamage = 10;
 
     public static float orbitSpeed = 50.0f;
+
+    // Player variables
+    public static float playerSpeed = 4;
+
 }
