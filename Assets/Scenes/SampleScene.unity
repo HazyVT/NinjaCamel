@@ -2465,6 +2465,7 @@ MonoBehaviour:
   shurikenImage: {fileID: 21300000, guid: 9b0fcbf316ec6451299f9ac30a356f96, type: 3}
   chakramImage: {fileID: 21300000, guid: c997f1e5ccc614c758b05c32d7181af5, type: 3}
   swordImage: {fileID: 21300000, guid: a3b501a27f0b14bc9bb2d38f2cac7f8a, type: 3}
+  sandalImage: {fileID: 21300000, guid: 6add788df57a9417794ec8e2039ebfe6, type: 3}
   weaponImages:
   - {fileID: 347693676}
   - {fileID: 207139654}

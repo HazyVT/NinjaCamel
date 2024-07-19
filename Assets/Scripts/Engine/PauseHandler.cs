@@ -12,6 +12,7 @@ public class PauseHandler : MonoBehaviour
     public Sprite shurikenImage;
     public Sprite chakramImage;
     public Sprite swordImage;
+    public Sprite sandalImage;
 
     public GameObject[] weaponImages;
     public GameObject weaponImageHolder;
@@ -26,7 +27,8 @@ public class PauseHandler : MonoBehaviour
     public GameObject healthDrop;
     private float healthTime = 0f;
 
-    private string[] weapons = { "shuriken", "chakram", "melee"};
+    private List<string> weapons = new();
+    private List<string> upgradeChoices = new();
 
     void Start()
     {
@@ -39,6 +41,11 @@ public class PauseHandler : MonoBehaviour
         WaveManager.wave = 1;
         Globals.shurikenFireSpeed = 2;
         Globals.shurikenLevel = 1;
+
+        weapons.Add("shuriken");
+        weapons.Add("chakram");
+        weapons.Add("melee");
+        weapons.Add("sandal");        
     }
 
     void Update()
@@ -47,9 +54,33 @@ public class PauseHandler : MonoBehaviour
         {
             screenDim.SetActive(true);
 
-            weaponImages[0].GetComponent<Image>().sprite = shurikenImage;
-            weaponImages[1].GetComponent<Image>().sprite = chakramImage;
-            weaponImages[2].GetComponent<Image>().sprite = swordImage;
+            List<string> upgrades = GetWeaponsToUpgrade();
+            upgradeChoices = upgrades;
+
+            for (int i = 0; i < upgrades.Count; i++)
+            {
+                string choice = upgrades[i];
+                Sprite image = null;
+                switch (choice)
+                {
+                    case "shuriken":
+                        image = shurikenImage;
+                        break;
+                    case "chakram":
+                        image = chakramImage;
+                        break;
+                    case "melee":
+                        image = swordImage;
+                        break;
+                    case "sandal":
+                        image = sandalImage;
+                        break;
+                }
+                if (image != null)
+                {
+                    weaponImages[i].GetComponent<Image>().sprite = image;
+                }
+            }
 
             ShowLevelUpOptions();
             descriptionHolder.SetActive(true);
@@ -190,5 +221,20 @@ public class PauseHandler : MonoBehaviour
             Globals.meleeLevel++;
             Globals.hasMelee = true;
         }
+    }
+
+    private List<string> GetWeaponsToUpgrade()
+    {
+        List<string> choices = weapons;
+        List<string> made = new List<string>();
+
+        for (int i = 0; i < 3; i++)
+        {
+            int choiceNo = Random.Range(0, choices.Count);
+            made.Add(choices[choiceNo]);
+            choices.RemoveAt(choiceNo);
+        }
+
+        return made;
     }
 }
