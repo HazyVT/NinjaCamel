@@ -68,7 +68,6 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (health <= 0)
         {
-            
             CreateDust();
             Instantiate(xpPrefab, transform.position, Quaternion.identity, holder.transform);
             Destroy(gameObject);

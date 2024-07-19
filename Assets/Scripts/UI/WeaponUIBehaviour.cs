@@ -49,6 +49,9 @@ public class WeaponUIBehaviour : MonoBehaviour, IPointerDownHandler
             case "sandal":
                 gameHandler.GetComponent<PauseHandler>().OnSandalLevelUp();
                 break;
+            case "lightning":
+                gameHandler.GetComponent<PauseHandler>().OnLightningLevelUp();
+                break;
         }
 
         gameHandler.GetComponent<PauseHandler>().HighlightSelectedWeapon(number);

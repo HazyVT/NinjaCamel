@@ -2466,6 +2466,7 @@ MonoBehaviour:
   chakramImage: {fileID: 21300000, guid: c997f1e5ccc614c758b05c32d7181af5, type: 3}
   swordImage: {fileID: 21300000, guid: a3b501a27f0b14bc9bb2d38f2cac7f8a, type: 3}
   sandalImage: {fileID: 21300000, guid: 6add788df57a9417794ec8e2039ebfe6, type: 3}
+  thunderImage: {fileID: 21300000, guid: 8c7d06958de024965ba69b75195ed18b, type: 3}
   weaponImages:
   - {fileID: 347693676}
   - {fileID: 207139654}
@@ -2476,6 +2477,7 @@ MonoBehaviour:
   chooseButton: {fileID: 267411863}
   healthDrop: {fileID: 6993735430378832147, guid: ca1c77e3de6a04a27a272633dd9a1f32, type: 3}
   upgradeChoices: []
+  player: {fileID: 1015434068}
 --- !u!4 &713844985
 Transform:
   m_ObjectHideFlags: 0
@@ -3326,7 +3328,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2173878686481104092, guid: 49e04f30a407f444793866c969db58ed, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1092489948}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6711835918620169676, guid: 49e04f30a407f444793866c969db58ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1015434076}
   m_SourcePrefab: {fileID: 100100000, guid: 49e04f30a407f444793866c969db58ed, type: 3}
 --- !u!1 &1015434068 stripped
 GameObject:
@@ -3338,6 +3343,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2173878686481104092, guid: 49e04f30a407f444793866c969db58ed, type: 3}
   m_PrefabInstance: {fileID: 1003783554}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1015434076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015434068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81690ea9512db48f089c2fb56377df8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  times: 1
 --- !u!1 &1028419705
 GameObject:
   m_ObjectHideFlags: 0

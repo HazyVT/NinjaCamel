@@ -2,10 +2,16 @@ public class Globals
 {
     public static bool hasMelee = false;
     public static bool hasChakram = false;
+    public static bool hasLightning = false;
 
     public static int shurikenLevel = 1;
     public static int meleeLevel = 0;
     public static int chakramLevel = 0;
+    public static int lightningLevel = 0;
+    public static int shurikenMaxLevel = 4;
+    public static int meleeLMaxLevel = 2;
+    public static int chakramMaxLevel = 3;
+    public static int lightningMaxLevel = 2;
 
     // Item variables
     public static float shurikenFireSpeed = 2;
@@ -14,7 +20,9 @@ public class Globals
 
     public static float orbitSpeed = 50.0f;
 
+    public static float lightningFireSpeed = 2f;
+    public static int lightningDamage = 10;
+
     // Player variables
     public static float playerSpeed = 4;
-
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class PauseHandler : MonoBehaviour
     public Sprite chakramImage;
     public Sprite swordImage;
     public Sprite sandalImage;
+    public Sprite thunderImage;
 
     public GameObject[] weaponImages;
     public GameObject weaponImageHolder;
@@ -30,22 +32,28 @@ public class PauseHandler : MonoBehaviour
     private List<string> weapons = new();
     public List<string> upgradeChoices = new();
 
+    public GameObject player;
+
     void Start()
     {
         created = false;
         Globals.hasChakram = false;
         Globals.hasMelee = false;
+        Globals.hasLightning = false;
         Globals.chakramLevel = 0;
         Globals.meleeLevel = 0;
+        Globals.lightningLevel = 0;
         ExperienceManager.ResetExperienceManager();
         WaveManager.wave = 1;
         Globals.shurikenFireSpeed = 2;
         Globals.shurikenLevel = 1;
+        Globals.lightningFireSpeed = 2;
 
         weapons.Add("shuriken");
         weapons.Add("chakram");
         weapons.Add("melee");
-        weapons.Add("sandal");        
+        weapons.Add("sandal");   
+        weapons.Add("lightning");     
     }
 
     void Update()
@@ -75,6 +83,9 @@ public class PauseHandler : MonoBehaviour
                         break;
                     case "sandal":
                         image = sandalImage;
+                        break;
+                    case "lightning":
+                        image = thunderImage;
                         break;
                 }
 
@@ -110,6 +121,9 @@ public class PauseHandler : MonoBehaviour
                 break;
             case "sandal":
                 OnSandalLevelUp();
+                break;
+            case "lightning":
+                OnLightningLevelUp();
                 break;
         }
     }
@@ -168,6 +182,22 @@ public class PauseHandler : MonoBehaviour
         chosen = "sandal";
     }
 
+    public void OnLightningLevelUp()
+    {
+        switch (Globals.lightningLevel)
+        {
+            case 0:
+                textDescription.text = "Gain a lightning attack that strikes from the sky";
+                break;
+            case 1:
+                textDescription.text = "Make lightning attack strike faster";
+                break;
+            case 2:
+                textDescription.text = "Make lightning attack strike twice";
+                break;
+        }
+    }
+
     public void HighlightSelectedWeapon(int index)
     {
         for (int i = 0; i < weaponImages.Length; i++)
@@ -182,16 +212,19 @@ public class PauseHandler : MonoBehaviour
         switch (chosen)
         {
             case "shuriken":
-                ApplyShurikenUpgrade();
+                if (Globals.shurikenLevel != Globals.shurikenMaxLevel) ApplyShurikenUpgrade();
                 break;
             case "chakram":
-                ApplyChakramUpgrade();
+                if (Globals.chakramLevel != Globals.chakramMaxLevel) ApplyChakramUpgrade();
                 break;
             case "melee":
-                ApplyMeleeUpgrade();
+                if (Globals.meleeLevel != Globals.meleeLMaxLevel) ApplyMeleeUpgrade();
                 break;
             case "sandal":
                 Globals.playerSpeed += 0.5f;
+                break;
+            case "lightning":
+                if (Globals.lightningLevel !=  Globals.lightningMaxLevel) ApplyLightningUpgrade();
                 break;
         }
 
@@ -205,41 +238,49 @@ public class PauseHandler : MonoBehaviour
 
     private void ApplyShurikenUpgrade()
     {
-        if (Globals.shurikenLevel < 2)
+        switch (Globals.shurikenLevel)
         {
-            switch (Globals.shurikenLevel)
-            {
-                case 1:
-                    Globals.shurikenFireSpeed -= 0.4f;
-                    break;
-                case 2:
-                    break;
-            }
-            Globals.shurikenLevel++;
+            case 1:
+                Globals.shurikenFireSpeed -= 0.4f;
+                break;
+            case 2:
+                break;
         }
+        Globals.shurikenLevel++;
+    }
+
+    private void ApplyLightningUpgrade()
+    {
+        switch (Globals.lightningLevel)
+        {
+            case 0:
+                Globals.hasLightning = true;
+                break;
+            case 1:
+                Globals.lightningFireSpeed -= 0.5f;
+                break;
+            case 2:
+                player.GetComponent<LightningWeaponScript>().times = 2;
+                break;
+        }
+        Globals.lightningLevel++;
     }
 
     private void ApplyChakramUpgrade()
     {
-        if (Globals.chakramLevel < 1)
-        {
-            Globals.hasChakram = true;
-            Globals.chakramLevel = 1;
-        }
+        Globals.hasChakram = true;
+        Globals.chakramLevel = 1;
     }
 
     private void ApplyMeleeUpgrade()
     {
-        if (Globals.meleeLevel < 2)
-        {
-            Globals.meleeLevel++;
-            Globals.hasMelee = true;
-        }
+        Globals.meleeLevel++;
+        Globals.hasMelee = true;
     }
 
     private List<string> GetWeaponsToUpgrade()
     {
-        List<string> choices = weapons;
+        List<string> choices = new List<string>(weapons);
         List<string> made = new List<string>();
 
         for (int i = 0; i < 3; i++)
