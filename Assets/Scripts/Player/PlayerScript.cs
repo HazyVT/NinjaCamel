@@ -62,6 +62,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (!ExperienceManager.isLeveling)
         {
+            movementSpeed = Globals.playerSpeed;
             HandleDeath();
             HandleCameraShake();
             bulletSpawningTimeInterval = Globals.shurikenFireSpeed;
