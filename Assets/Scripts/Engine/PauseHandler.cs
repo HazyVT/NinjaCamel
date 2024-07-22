@@ -24,7 +24,7 @@ public class PauseHandler : MonoBehaviour
     public GameObject chooseButton;
 
     private static bool created;
-    private string chosen = "shuriken";
+    private string chosen;
 
     public GameObject healthDrop;
     private float healthTime = 0f;
@@ -39,10 +39,10 @@ public class PauseHandler : MonoBehaviour
         created = false;
         Globals.hasChakram = false;
         Globals.hasMelee = false;
-        Globals.hasLightning = true;
+        Globals.hasLightning = false;
         Globals.chakramLevel = 0;
         Globals.meleeLevel = 0;
-        Globals.lightningLevel = 1;
+        Globals.lightningLevel = 0;
         ExperienceManager.ResetExperienceManager();
         WaveManager.wave = 1;
         Globals.shurikenFireSpeed = 2;
