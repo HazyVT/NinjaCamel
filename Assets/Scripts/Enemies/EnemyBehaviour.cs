@@ -35,7 +35,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (!ExperienceManager.isLeveling)
         {
             rb.position = Vector2.MoveTowards(rb.position, player.transform.position, speed * Time.deltaTime);
-            Vector2 diff = (rb.position - (Vector2)player.transform.position);
+            Vector2 diff = rb.position - (Vector2)player.transform.position;
             int horizontalCheck = (int)Mathf.Sign(diff.x);
             if (horizontalCheck == -1)
             {
@@ -62,7 +62,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         health -= reduction;
         transform.localScale = new(1.4f, 1.4f, 1f);
-        hitParticle.Play();
+        //hitParticle.Play();
         //Instantiate(hit10, transform.position, Quaternion.identity);
         SpawnInDamageText(reduction);
 
@@ -91,15 +91,10 @@ public class EnemyBehaviour : MonoBehaviour
         // Get angle between shuriken and enemy
         float angle = Vector3.Angle(bullet.transform.position, transform.position);
         hitParticle.transform.Rotate(new(0,0,angle * 360));
-
-        hitParticle.Play();
-
-
-
-
         if (health <= 0)
         {
             CreateDust();
+            hitParticle.Play();
             Instantiate(xpPrefab, transform.position, Quaternion.identity, holder.transform);
             Destroy(gameObject);
             sr.transform.localScale = new Vector3(0, 0, 0);

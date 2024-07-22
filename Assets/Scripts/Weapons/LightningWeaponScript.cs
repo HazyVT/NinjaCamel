@@ -5,7 +5,6 @@ using UnityEngine;
 public class LightningWeaponScript : MonoBehaviour
 {
 
-    private float time;
     private float duration;
 
     public int times = 1;
@@ -13,31 +12,25 @@ public class LightningWeaponScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        time = Globals.lightningFireSpeed;
-        duration = time;
+        duration = Globals.lightningFireSpeed;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StrikeLightning()
     {
-        time = Globals.lightningFireSpeed;
-
-        if (!ExperienceManager.isLeveling && Globals.hasLightning)
-        {
-            duration -= Time.deltaTime;
-
-            if (duration <= 0)
+        for (int i = 0; i < times; i++)
             {
-                for (int i = 0; i < times; i++)
+                float waitTime = 0.4f;
+
+                while (waitTime > 0)
                 {
-                    // Find closest enemy
-                    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                    GameObject closest = FindClosestEnemy(enemies, transform.position);
-                    closest.GetComponent<EnemyBehaviour>().OnOrbitHit(Globals.lightningDamage);
+                    waitTime -= Time.deltaTime;
                 }
-                
+                print("Fire");
+                // Find closest enemy
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                GameObject closest = FindClosestEnemy(enemies, transform.position);
+                closest.GetComponent<EnemyBehaviour>().OnOrbitHit(Globals.lightningDamage);
             }
-        }
     }
 
     private GameObject FindClosestEnemy(GameObject[] enemies, Vector3 position)

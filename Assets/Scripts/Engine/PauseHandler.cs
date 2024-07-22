@@ -68,6 +68,7 @@ public class PauseHandler : MonoBehaviour
             for (int i = 0; i < upgrades.Count; i++)
             {
                 string choice = upgrades[i];
+                chosen = upgrades[0];
                 Sprite image = null;
 
                 switch (choice)
@@ -196,6 +197,7 @@ public class PauseHandler : MonoBehaviour
                 textDescription.text = "Make lightning attack strike twice";
                 break;
         }
+        chosen = "lightning";
     }
 
     public void HighlightSelectedWeapon(int index)
@@ -212,7 +214,7 @@ public class PauseHandler : MonoBehaviour
         switch (chosen)
         {
             case "shuriken":
-                if (Globals.shurikenLevel != Globals.shurikenMaxLevel) ApplyShurikenUpgrade();
+                if (Globals.shurikenLevel != Globals.shurikenMaxLevel) ApplyShurikenUpgrade(); 
                 break;
             case "chakram":
                 if (Globals.chakramLevel != Globals.chakramMaxLevel) ApplyChakramUpgrade();
@@ -246,6 +248,7 @@ public class PauseHandler : MonoBehaviour
             case 2:
                 break;
         }
+        Globals.shurikenDamage += 10;
         Globals.shurikenLevel++;
     }
 
@@ -255,6 +258,7 @@ public class PauseHandler : MonoBehaviour
         {
             case 0:
                 Globals.hasLightning = true;
+                //print("Gained lightning");
                 break;
             case 1:
                 Globals.lightningFireSpeed -= 0.5f;
@@ -263,6 +267,7 @@ public class PauseHandler : MonoBehaviour
                 player.GetComponent<LightningWeaponScript>().times = 2;
                 break;
         }
+        Globals.lightningDamage += 10;
         Globals.lightningLevel++;
     }
 

@@ -27,6 +27,7 @@ public class PlayerScript : MonoBehaviour
 
     public float meleeAttackTimeInterval;
     private float meleeAttackDuration;
+    private float meleeWaitTime = 1;
     public GameObject meleePrefab;
 
     public Joystick joystick;
@@ -48,9 +49,12 @@ public class PlayerScript : MonoBehaviour
 
     public GameObject cameraHolder;
 
+    private float lightningDuration;
+
     // Start is called before the first frame update
     void Start()
     {
+
         rb = GetComponent<Rigidbody2D>();
         bulletSpawningTimeInterval = Globals.shurikenFireSpeed;
         bulletSpawnDuration = bulletSpawningTimeInterval;
@@ -58,6 +62,8 @@ public class PlayerScript : MonoBehaviour
         HealthManager.health = health;
         meleeAttackDuration = meleeAttackTimeInterval;
         currentLevel = Globals.shurikenLevel;
+        movementSpeed = Globals.playerSpeed;
+        lightningDuration = Globals.lightningFireSpeed;
 
     }
 
@@ -66,6 +72,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (!ExperienceManager.isLeveling)
         {
+            movementSpeed = Globals.playerSpeed;
             if (HealthManager.health <= 0 && !particleHasPlayed)
             {
                 particleSystem.Play();
@@ -78,6 +85,17 @@ public class PlayerScript : MonoBehaviour
                 if (deathDuration <= 0)
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
+            }
+
+            if (Globals.hasLightning)
+            {
+                lightningDuration -= Time.deltaTime;
+
+                if (lightningDuration <= 0)
+                {
+                    GetComponent<LightningWeaponScript>().StrikeLightning();
+                    lightningDuration = Globals.lightningFireSpeed;
                 }
             }
 
@@ -146,8 +164,33 @@ public class PlayerScript : MonoBehaviour
                     if (meleeAttackDuration <= 0)
                     {
                         int facing = sr.flipX ? -1 : 1;
-                        Instantiate(meleePrefab, new(transform.position.x + facing * 2, transform.position.y, transform.position.z), Quaternion.identity);
-                        meleeAttackDuration = meleeAttackTimeInterval;
+
+                        switch (Globals.meleeLevel)
+                        {
+                            case 1:
+                                Instantiate(meleePrefab, new(transform.position.x + facing * 2, transform.position.y, transform.position.z), Quaternion.identity, transform);
+                                meleeAttackDuration = meleeAttackTimeInterval;
+                                break;
+                            case 2:
+                            default:
+                                Instantiate(meleePrefab, new(transform.position.x + facing * 2, transform.position.y, transform.position.z), Quaternion.identity, transform);
+                                print("Melee");
+                                while (meleeWaitTime > 0)
+                                {
+                                    meleeWaitTime -= Time.deltaTime;
+                                }
+
+                                if (meleeWaitTime <= 0)
+                                {
+                                    Instantiate(meleePrefab, new(transform.position.x - facing * 2, transform.position.y, transform.position.z), Quaternion.identity, transform);
+                                    meleeWaitTime = 1;
+                                }
+                           
+                                meleeAttackDuration = meleeAttackTimeInterval;
+                                break;
+
+                        }
+                        
                     }
                 }
 

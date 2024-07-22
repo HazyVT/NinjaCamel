@@ -3220,7 +3220,7 @@ PrefabInstance:
       objectReference: {fileID: 534789338}
     - target: {fileID: 4104972739805255250, guid: 49e04f30a407f444793866c969db58ed, type: 3}
       propertyPath: meleeAttackTimeInterval
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4646131857873800597, guid: 49e04f30a407f444793866c969db58ed, type: 3}
       propertyPath: m_Constraints
