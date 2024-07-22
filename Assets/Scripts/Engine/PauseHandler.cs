@@ -39,10 +39,10 @@ public class PauseHandler : MonoBehaviour
         created = false;
         Globals.hasChakram = false;
         Globals.hasMelee = false;
-        Globals.hasLightning = false;
+        Globals.hasLightning = true;
         Globals.chakramLevel = 0;
         Globals.meleeLevel = 0;
-        Globals.lightningLevel = 0;
+        Globals.lightningLevel = 1;
         ExperienceManager.ResetExperienceManager();
         WaveManager.wave = 1;
         Globals.shurikenFireSpeed = 2;
@@ -220,16 +220,16 @@ public class PauseHandler : MonoBehaviour
                 if (Globals.shurikenLevel != Globals.shurikenMaxLevel) Globals.shurikenLevel++;
                 break;
             case "chakram":
-                if (Globals.chakramLevel != Globals.chakramMaxLevel) Globals.chakramLevel++;;
+                if (Globals.chakramLevel != Globals.chakramMaxLevel) ApplyChakramUpgrade();
                 break;
             case "melee":
-                if (Globals.meleeLevel != Globals.meleeLMaxLevel) Globals.meleeLevel++;
+                if (Globals.meleeLevel != Globals.meleeLMaxLevel) ApplyMeleeUpgrade();
                 break;
             case "sandal":
                 Globals.playerSpeed += 0.5f;
                 break;
             case "lightning":
-                if (Globals.lightningLevel !=  Globals.lightningMaxLevel) Globals.lightningLevel++;;
+                if (Globals.lightningLevel !=  Globals.lightningMaxLevel) ApplyLightningUpgrade();
                 break;
         }
 

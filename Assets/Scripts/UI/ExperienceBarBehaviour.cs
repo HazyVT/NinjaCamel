@@ -21,7 +21,7 @@ public class ExperienceBarBehaviour : MonoBehaviour
         //float size = ExperienceManager.experience / ExperienceManager.level;
         //bar.transform.localScale = new(size / 100, bar.transform.localScale.y, bar.transform.localScale.z);
         fillAmount = ExperienceManager.experience / ExperienceManager.level;
-        print(fillAmount);
+        //print(fillAmount);
         //fillAmount += Time.deltaTime;
         GetComponent<Image>().fillAmount = fillAmount / 100;
     }

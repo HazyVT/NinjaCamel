@@ -6,6 +6,9 @@ public class LightningWeaponScript : MonoBehaviour
 {
 
     private float duration;
+    public GameObject lightningPrefab;
+    private bool firstSpawn;
+    private float middleDuration;
 
     public int times = 1;
 
@@ -13,24 +16,32 @@ public class LightningWeaponScript : MonoBehaviour
     void Start()
     {
         duration = Globals.lightningFireSpeed;
+        middleDuration = 0.4f;
     }
 
     public void StrikeLightning()
     {
-        for (int i = 0; i < times; i++)
-            {
-                float waitTime = 0.4f;
+        if (!firstSpawn)
+        {
+            SpawnLightning();
+            firstSpawn = true;
+        }
 
-                while (waitTime > 0)
-                {
-                    waitTime -= Time.deltaTime;
-                }
-                print("Fire");
-                // Find closest enemy
-                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                GameObject closest = FindClosestEnemy(enemies, transform.position);
-                closest.GetComponent<EnemyBehaviour>().OnOrbitHit(Globals.lightningDamage);
+        if (Globals.lightningLevel == 3)
+        {
+            middleDuration -= Time.deltaTime;
+            if (middleDuration <= 0)
+            {
+                SpawnLightning();
+                middleDuration = 0.4f;
+                duration = Globals.lightningFireSpeed;
+                firstSpawn = false;
             }
+        } else
+        {
+            duration = Globals.lightningFireSpeed;
+            firstSpawn = false;
+        }
     }
 
     private GameObject FindClosestEnemy(GameObject[] enemies, Vector3 position)
@@ -51,5 +62,13 @@ public class LightningWeaponScript : MonoBehaviour
         }
 
         return closest;
+    }
+
+    private void SpawnLightning()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closest = FindClosestEnemy(enemies, transform.position);
+        Instantiate(lightningPrefab, closest.transform.position, Quaternion.identity);
+        closest.GetComponent<EnemyBehaviour>().OnOrbitHit(Globals.lightningDamage);
     }
 }
