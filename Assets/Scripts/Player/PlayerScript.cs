@@ -36,8 +36,7 @@ public class PlayerScript : MonoBehaviour
     public SpriteRenderer sr;
     private Rigidbody2D rb;
 
-    public float shake = 0;
-    private float shakeAmount = 0.7f;
+
 
     private float facing = 1;
     private int currentLevel;
@@ -102,19 +101,8 @@ public class PlayerScript : MonoBehaviour
                 {
                     GetComponent<LightningWeaponScript>().StrikeLightning();
                     lightningDuration = Globals.lightningFireSpeed;
+                    cameraHolder.GetComponent<CameraScript>().CauseShake(0.3f, 0.2f);
                 }
-            }
-
-
-                
-            if (shake > 0)
-            {
-                Vector3 shakeVector = UnityEngine.Random.insideUnitSphere * shakeAmount;
-                cameraHolder.transform.localPosition = new(shakeVector.x, shakeVector.y, -24);
-                shake -= Time.deltaTime;
-            } else {
-                shake = 0;
-                //Camera.main.transform.position = new(0,0,-1);
             }
 
             bulletSpawningTimeInterval = Globals.shurikenFireSpeed;
@@ -277,7 +265,7 @@ public class PlayerScript : MonoBehaviour
         if (!hasCollided)
         {
             hasCollided = true;
-            shake = 0.2f;
+            cameraHolder.GetComponent<CameraScript>().CauseShake(0.5f, 0.7f);
             sr.color = Color.red;
             HealthManager.changeHealth(-10);
         }
