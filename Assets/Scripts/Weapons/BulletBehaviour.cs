@@ -25,38 +25,32 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (!ExperienceManager.isLeveling)
         {
-            if (Globals.shurikenLevel == 1 || Globals.shurikenLevel == 2)
+            switch (which)
             {
-                if (closestEnemy != null)
-                {
-                    transform.position = Vector3.MoveTowards(transform.position, closestEnemy.transform.position, speed * Time.deltaTime);
-                }
-                else
-                {
-                    float xpos = Utilities.Approach(transform.position.x, movementVector.x + transform.position.x, speed * Time.deltaTime);
-                    float ypos = Utilities.Approach(transform.position.y, movementVector.y + transform.position.y, speed * Time.deltaTime);
-                    transform.position = new(xpos, ypos, transform.position.z);
-                }
-            } else
-            {
-                print("New");
-                switch (which)
-                {
-                    case 0:
-                        float _xpos = Utilities.Approach(transform.position.x, transform.position.x + (30 * facing), speed * Time.deltaTime);
-                        transform.position = new(_xpos, transform.position.y, transform.position.z);
-                        break;
-                    case 1:
-                        float _xpos2 = Utilities.Approach(transform.position.x, transform.position.x + (30 * facing), speed * Time.deltaTime);
-                        float _ypos2 = Utilities.Approach(transform.position.y, transform.position.y + 2 * Time.deltaTime, speed * Time.deltaTime);
-                        transform.position = new(_xpos2, _ypos2, transform.position.z);
-                        break;
-                    case 2:
-                        float _xpos3 = Utilities.Approach(transform.position.x, transform.position.x + (30 * facing), speed * Time.deltaTime);
-                        float _ypos3 = Utilities.Approach(transform.position.y, transform.position.y - 2 * Time.deltaTime, speed * Time.deltaTime);
-                        transform.position = new(_xpos3, _ypos3, transform.position.z);
-                        break;
-                }
+                case 0:
+                    float _xpos = Utilities.Approach(transform.position.x, transform.position.x + (30 * facing), speed * Time.deltaTime);
+                    transform.position = new(_xpos, transform.position.y, transform.position.z);
+                    break;
+                case 1:
+                    float _xpos2 = Utilities.Approach(transform.position.x, transform.position.x + (30 * facing), speed * Time.deltaTime);
+                    float _ypos2 = Utilities.Approach(transform.position.y, transform.position.y + 2 * Time.deltaTime, speed * Time.deltaTime);
+                    transform.position = new(_xpos2, _ypos2, transform.position.z);
+                    break;
+                case 2:
+                    float _xpos3 = Utilities.Approach(transform.position.x, transform.position.x + (30 * facing), speed * Time.deltaTime);
+                    float _ypos3 = Utilities.Approach(transform.position.y, transform.position.y - 2 * Time.deltaTime, speed * Time.deltaTime);
+                    transform.position = new(_xpos3, _ypos3, transform.position.z);
+                    break;
+                case 3:
+                    float _xpos4 = Utilities.Approach(transform.position.x, transform.position.x + (30 * facing), speed * Time.deltaTime);
+                    float _ypos4 = Utilities.Approach(transform.position.y, transform.position.y + 4 * Time.deltaTime, speed * Time.deltaTime);
+                    transform.position = new(_xpos4, _ypos4, transform.position.z);
+                    break;
+                case 4:
+                    float _xpos5 = Utilities.Approach(transform.position.x, transform.position.x + (30 * facing), speed * Time.deltaTime);
+                    float _ypos5 = Utilities.Approach(transform.position.y, transform.position.y - 4 * Time.deltaTime, speed * Time.deltaTime);
+                    transform.position = new(_xpos5, _ypos5, transform.position.z);
+                    break;
             }
             
             Vector3 camerapos = Camera.main.transform.position;

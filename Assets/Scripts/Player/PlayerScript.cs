@@ -73,6 +73,7 @@ public class PlayerScript : MonoBehaviour
         if (!ExperienceManager.isLeveling)
         {
             movementSpeed = Globals.playerSpeed;
+
             if (HealthManager.health <= 0 && !particleHasPlayed)
             {
                 particleSystem.Play();
@@ -134,27 +135,8 @@ public class PlayerScript : MonoBehaviour
 
                 if (bulletSpawnDuration <= 0)
                 {
-                    currentLevel = Globals.shurikenLevel;
-                    if (currentLevel == 1 || currentLevel == 2)
-                    {
-                        GameObject shuriken = Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
-                        bulletSpawnDuration = bulletSpawningTimeInterval;
-                        transform.localScale = new(1.15f, 1.15f, 1f);
-                    } else
-                    {
-                        GameObject straightShuriken = Instantiate(bulletPrefab, transform.position, quaternion.identity, bulletHolder.transform);
-                        GameObject topRightShuriken = Instantiate(bulletPrefab, transform.position, quaternion.identity, bulletHolder.transform);
-                        GameObject BottomLeftShuriken = Instantiate(bulletPrefab, transform.position, quaternion.identity, bulletHolder.transform);
-                        straightShuriken.GetComponent<BulletBehaviour>().which = 0;
-                        topRightShuriken.GetComponent<BulletBehaviour>().which = 1;
-                        BottomLeftShuriken.GetComponent<BulletBehaviour>().which = 2;
-                        straightShuriken.GetComponent<BulletBehaviour>().facing = facing;
-                        topRightShuriken.GetComponent<BulletBehaviour>().facing = facing;
-                        BottomLeftShuriken.GetComponent<BulletBehaviour>().facing = facing;
-                        bulletSpawnDuration = bulletSpawningTimeInterval;
-                        transform.localScale = new(1.15f, 1.15f, 1f);
-                    }
-                    
+                    GetComponent<ShurikenScript>().SpawnShuriken(facing);
+                    bulletSpawnDuration = bulletSpawningTimeInterval;
                 }
 
                 if (Globals.hasMelee)
@@ -163,7 +145,6 @@ public class PlayerScript : MonoBehaviour
 
                     if (meleeAttackDuration <= 0)
                     {
-                        int facing = sr.flipX ? -1 : 1;
 
                         switch (Globals.meleeLevel)
                         {
