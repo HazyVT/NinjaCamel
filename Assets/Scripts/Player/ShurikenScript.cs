@@ -5,17 +5,18 @@ using UnityEngine;
 public class ShurikenScript : MonoBehaviour
 {
 
-    public GameObject bulletPrefab;
-    public GameObject bulletHolder;
+    public GameObject shurikenPrefab;
+    public GameObject shurikenHolder;
+    public GameObject thirdLevelShurikenPrefab;
 
     public void SpawnShuriken(float facing)
     {
         switch (Globals.shurikenLevel)
         {
             case 1:
-                GameObject straightShuriken1 = Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
-                GameObject topRightShuriken1 = Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
-                GameObject BottomLeftShuriken1 = Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
+                GameObject straightShuriken1 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
+                GameObject topRightShuriken1 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
+                GameObject BottomLeftShuriken1 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
                 straightShuriken1.GetComponent<BulletBehaviour>().which = 0;
                 topRightShuriken1.GetComponent<BulletBehaviour>().which = 1;
                 BottomLeftShuriken1.GetComponent<BulletBehaviour>().which = 2;
@@ -24,11 +25,12 @@ public class ShurikenScript : MonoBehaviour
                 BottomLeftShuriken1.GetComponent<BulletBehaviour>().facing = facing;
                 break;
             case 2:
-                GameObject straightShuriken2 = Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
-                GameObject topRightShuriken2 = Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
-                GameObject bottomLeftShuriken2 = Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
-                GameObject topShuriken2 = Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
-                GameObject bottomShuriken2 = Instantiate(bulletPrefab, transform.position, Quaternion.identity, bulletHolder.transform);
+            case 3:
+                GameObject straightShuriken2 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
+                GameObject topRightShuriken2 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
+                GameObject bottomLeftShuriken2 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
+                GameObject topShuriken2 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
+                GameObject bottomShuriken2 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
                 straightShuriken2.GetComponent<BulletBehaviour>().which = 0;
                 topRightShuriken2.GetComponent<BulletBehaviour>().which = 1;
                 bottomLeftShuriken2.GetComponent<BulletBehaviour>().which = 2;

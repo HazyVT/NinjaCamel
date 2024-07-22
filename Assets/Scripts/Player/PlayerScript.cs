@@ -22,6 +22,8 @@ public class PlayerScript : MonoBehaviour
 
     public float bulletSpawningTimeInterval;
     private float bulletSpawnDuration;
+    private float middleDuration;
+    private bool firstSpawn;
     public GameObject bulletPrefab;
     public GameObject bulletHolder;
 
@@ -64,6 +66,9 @@ public class PlayerScript : MonoBehaviour
         currentLevel = Globals.shurikenLevel;
         movementSpeed = Globals.playerSpeed;
         lightningDuration = Globals.lightningFireSpeed;
+        middleDuration = 0.4f;
+        firstSpawn = false;
+
 
     }
 
@@ -135,8 +140,34 @@ public class PlayerScript : MonoBehaviour
 
                 if (bulletSpawnDuration <= 0)
                 {
-                    GetComponent<ShurikenScript>().SpawnShuriken(facing);
-                    bulletSpawnDuration = bulletSpawningTimeInterval;
+                    if (!firstSpawn)
+                    {
+                        GetComponent<ShurikenScript>().SpawnShuriken(facing);
+                        firstSpawn = true;
+                    }
+
+
+                    if (Globals.shurikenLevel == 3)
+                    {
+
+                        middleDuration -= Time.deltaTime;
+
+                        if (middleDuration <= 0)
+                        {
+                            GetComponent<ShurikenScript>().SpawnShuriken(facing);
+                            bulletSpawnDuration = bulletSpawningTimeInterval;
+                            middleDuration = 0.4f;
+                            firstSpawn = false;
+
+                        }
+                    } else
+                    {
+                        bulletSpawnDuration = bulletSpawningTimeInterval;
+                        firstSpawn = false;
+                    }
+
+                    
+
                 }
 
                 if (Globals.hasMelee)

@@ -134,10 +134,10 @@ public class PauseHandler : MonoBehaviour
         switch (Globals.shurikenLevel)
         {
             case 1:
-                textDescription.text = "Increase shuriken attack speed by 40%";
+                textDescription.text = "Fire 5 shurikens on every attack";
                 break;
             case 2:
-                textDescription.text = "Fire three shurikens in your facing direction";
+                textDescription.text = "Fire attack twice";
                 break;
         }
 
@@ -214,19 +214,19 @@ public class PauseHandler : MonoBehaviour
         switch (chosen)
         {
             case "shuriken":
-                if (Globals.shurikenLevel != Globals.shurikenMaxLevel) ApplyShurikenUpgrade(); 
+                if (Globals.shurikenLevel != Globals.shurikenMaxLevel) Globals.shurikenLevel++;
                 break;
             case "chakram":
-                if (Globals.chakramLevel != Globals.chakramMaxLevel) ApplyChakramUpgrade();
+                if (Globals.chakramLevel != Globals.chakramMaxLevel) Globals.chakramLevel++;;
                 break;
             case "melee":
-                if (Globals.meleeLevel != Globals.meleeLMaxLevel) ApplyMeleeUpgrade();
+                if (Globals.meleeLevel != Globals.meleeLMaxLevel) Globals.meleeLevel++;
                 break;
             case "sandal":
                 Globals.playerSpeed += 0.5f;
                 break;
             case "lightning":
-                if (Globals.lightningLevel !=  Globals.lightningMaxLevel) ApplyLightningUpgrade();
+                if (Globals.lightningLevel !=  Globals.lightningMaxLevel) Globals.lightningLevel++;;
                 break;
         }
 
@@ -243,13 +243,12 @@ public class PauseHandler : MonoBehaviour
         switch (Globals.shurikenLevel)
         {
             case 1:
-                Globals.shurikenFireSpeed -= 0.4f;
                 break;
             case 2:
                 break;
         }
-        Globals.shurikenDamage += 10;
-        Globals.shurikenLevel++;
+        //Globals.shurikenDamage += 10;
+        
     }
 
     private void ApplyLightningUpgrade()
@@ -268,7 +267,7 @@ public class PauseHandler : MonoBehaviour
                 break;
         }
         Globals.lightningDamage += 10;
-        Globals.lightningLevel++;
+        
     }
 
     private void ApplyChakramUpgrade()
