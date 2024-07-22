@@ -7,13 +7,18 @@ public class ShurikenScript : MonoBehaviour
 
     public GameObject shurikenPrefab;
     public GameObject shurikenHolder;
-    public GameObject thirdLevelShurikenPrefab;
+    //public GameObject thirdLevelShurikenPrefab;
 
     public void SpawnShuriken(float facing)
     {
         switch (Globals.shurikenLevel)
         {
             case 1:
+                GameObject one = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
+                one.GetComponent<BulletBehaviour>().which = 0;
+                one.GetComponent<BulletBehaviour>().facing = facing;
+                break;
+            case 2:
                 GameObject straightShuriken1 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
                 GameObject topRightShuriken1 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
                 GameObject BottomLeftShuriken1 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
@@ -24,8 +29,8 @@ public class ShurikenScript : MonoBehaviour
                 topRightShuriken1.GetComponent<BulletBehaviour>().facing = facing;
                 BottomLeftShuriken1.GetComponent<BulletBehaviour>().facing = facing;
                 break;
-            case 2:
             case 3:
+            case 4:
                 GameObject straightShuriken2 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
                 GameObject topRightShuriken2 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);
                 GameObject bottomLeftShuriken2 = Instantiate(shurikenPrefab, transform.position, Quaternion.identity, shurikenHolder.transform);

@@ -134,9 +134,12 @@ public class PauseHandler : MonoBehaviour
         switch (Globals.shurikenLevel)
         {
             case 1:
-                textDescription.text = "Fire 5 shurikens on every attack";
+                textDescription.text = "Fire 3 shurikens on every attack";
                 break;
             case 2:
+                textDescription.text = "Fire 5 shurikens on every attack";
+                break;
+            case 3:
                 textDescription.text = "Fire attack twice";
                 break;
         }

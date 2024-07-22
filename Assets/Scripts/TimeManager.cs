@@ -1,15 +1,20 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
 {
-    public Text timerText;
+    public TextMeshProUGUI timerText;
     private float elapsedTime = 0f;
 
     void Update()
     {
-        elapsedTime += Time.deltaTime;
-        UpdateTimerText(elapsedTime);
+        if (!ExperienceManager.isLeveling)
+        {
+            elapsedTime += Time.deltaTime;
+            UpdateTimerText(elapsedTime);
+        }
+        
     }
 
     void UpdateTimerText(float time)
