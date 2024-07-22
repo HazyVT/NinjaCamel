@@ -107,8 +107,8 @@ public class PlayerScript : MonoBehaviour
 
             bulletSpawningTimeInterval = Globals.shurikenFireSpeed;
 
-            float xscale = Utilities.Approach(transform.localScale.x, 1, 2 * Time.deltaTime);
-            float yscale = Utilities.Approach(transform.localScale.y, 1, 2 * Time.deltaTime);
+            float xscale = Utilities.Approach(transform.localScale.x, 1.2f, Time.deltaTime / 6);
+            float yscale = Utilities.Approach(transform.localScale.y, 1.2f, Time.deltaTime / 6);
 
             transform.localScale = new(xscale, yscale, 1);
 
@@ -131,6 +131,7 @@ public class PlayerScript : MonoBehaviour
                     if (!firstSpawn)
                     {
                         GetComponent<ShurikenScript>().SpawnShuriken(facing);
+                        transform.localScale = new(1,1,1);
                         firstSpawn = true;
                     }
 

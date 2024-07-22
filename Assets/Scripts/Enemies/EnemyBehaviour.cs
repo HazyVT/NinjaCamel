@@ -73,11 +73,13 @@ public class EnemyBehaviour : MonoBehaviour
             Destroy(gameObject);
             sr.transform.localScale = new Vector3(0, 0, 0);
 
+            /*
             ExperienceManager.ChangeExperience(10);
             if (ExperienceManager.experience >= ExperienceManager.requiredExperience)
             {
                 ExperienceManager.GainLevel();
             }
+            */
         }
     }
 
