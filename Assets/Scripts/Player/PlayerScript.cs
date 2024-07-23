@@ -263,7 +263,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (!hasCollided)
+        if (!hasCollided && collision.gameObject.CompareTag("Enemy"))
         {
             hasCollided = true;
             cameraHolder.GetComponent<CameraScript>().CauseShake(0.5f, 0.7f);

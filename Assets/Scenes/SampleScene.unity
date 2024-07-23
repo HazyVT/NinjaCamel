@@ -2274,8 +2274,8 @@ MonoBehaviour:
   smoothTimeX: 0.05
   player: {fileID: 1015434068}
   bounds: 1
-  minCamearPos: {x: -30, y: -20, z: -1}
-  maxCamearPos: {x: 30, y: 20, z: -1}
+  minCamearPos: {x: -32, y: -23, z: -1}
+  maxCamearPos: {x: 32, y: 23, z: -1}
 --- !u!1 &534789338
 GameObject:
   m_ObjectHideFlags: 0
