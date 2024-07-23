@@ -7,7 +7,7 @@ public class CameraScript : MonoBehaviour
 
     public float shake = 0;
     private float shakeAmount;
-
+    
     // Start is called before the first frame update
     void Start()
     {

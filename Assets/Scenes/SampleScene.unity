@@ -2665,6 +2665,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50bc6b741bd7a4e66bb13a0d796fb8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carTerrain: {fileID: 640395223113493174, guid: 051fbc90272ee4f90b314081c7be65e9, type: 3}
+  thingamibobTerrain: {fileID: 8085692208425746003, guid: 79aee53f3c3304bfd934dc56ac3b988b, type: 3}
+  kettleTerrain: {fileID: 8764128129127639000, guid: c5b5782654047493aaf032775102c89f, type: 3}
+  LampTerrain: {fileID: 3624809760480546675, guid: 5d44a4373ac9646b69ed4f6776de642d, type: 3}
 --- !u!1001 &731384148
 PrefabInstance:
   m_ObjectHideFlags: 0

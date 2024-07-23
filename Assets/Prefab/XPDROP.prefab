@@ -215,8 +215,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xpAmount: 10
   text: {fileID: 7839459985462880706, guid: 8ae62d827ce5646679812c64a438af60, type: 3}
-  attractRadius: 0
-  attractSpeed: 0
+  attractRadius: 1
+  attractSpeed: 5
 --- !u!61 &7558574500745288198
 BoxCollider2D:
   m_ObjectHideFlags: 0
