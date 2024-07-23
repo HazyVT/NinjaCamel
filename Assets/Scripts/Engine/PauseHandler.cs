@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PauseHandler : MonoBehaviour
 {
-
     public GameObject canvas;
     public GameObject screenDim;
 
@@ -25,9 +24,6 @@ public class PauseHandler : MonoBehaviour
 
     private static bool created;
     private string chosen;
-
-    public GameObject healthDrop;
-    private float healthTime = 0f;
 
     private List<string> weapons = new();
     public List<string> upgradeChoices = new();
@@ -63,12 +59,12 @@ public class PauseHandler : MonoBehaviour
             screenDim.SetActive(true);
 
             List<string> upgrades = GetWeaponsToUpgrade();
+            chosen = upgrades[0];
             upgradeChoices = upgrades;
 
             for (int i = 0; i < upgrades.Count; i++)
             {
                 string choice = upgrades[i];
-                chosen = upgrades[0];
                 Sprite image = null;
 
                 switch (choice)
@@ -97,7 +93,26 @@ public class PauseHandler : MonoBehaviour
 
             }
 
-            ShowLevelUpOptions();
+            switch (chosen)
+            {
+                case "shuriken":
+                    OnShurikenLevelUp();
+                    break;
+                case "chakram":
+                    OnChakramLevelUp();
+                    break;
+                case "melee":
+                    OnMeleeLevelUp();
+                    break;
+                case "sandal":
+                    OnSandalLevelUp();
+                    break;
+                case "lightning":
+                    OnLightningLevelUp();
+                    break;
+            }
+
+            //ShowLevelUpOptions();
             HighlightSelectedWeapon(0);
             descriptionHolder.SetActive(true);
             chooseButton.SetActive(true);
@@ -107,25 +122,32 @@ public class PauseHandler : MonoBehaviour
         }
     }
 
+
     private void ShowLevelUpOptions()
     {
-        switch (chosen)
+        // Ensure all options are visible at the start
+        for (int i = 0; i < weaponImages.Length; i++)
         {
-            case "shuriken":
-                OnShurikenLevelUp();
-                break;
-            case "chakram":
-                OnChakramLevelUp();
-                break;
-            case "melee":
-                OnMeleeLevelUp();
-                break;
-            case "sandal":
-                OnSandalLevelUp();
-                break;
-            case "lightning":
-                OnLightningLevelUp();
-                break;
+            weaponImages[i].SetActive(true);
+        }
+
+        if (Globals.shurikenLevel < 2)
+        {
+            OnShurikenLevelUp();
+        }
+
+        if (Globals.chakramLevel < 3)
+        {
+            OnChakramLevelUp();
+        }
+
+        if (Globals.meleeLevel < 2)
+        {
+            OnMeleeLevelUp();
+        }
+        else
+        {
+            weaponImages[2].SetActive(false);
         }
     }
 
@@ -134,18 +156,24 @@ public class PauseHandler : MonoBehaviour
         switch (Globals.shurikenLevel)
         {
             case 1:
-                textDescription.text = "Fire 3 shurikens on every attack";
+                textDescription.text = "Fire three shurikens at once";
+                chosen = "shuriken";
                 break;
             case 2:
-                textDescription.text = "Fire 5 shurikens on every attack";
+                textDescription.text = "Fire five shurikens at once";
+                chosen = "shuriken";
                 break;
             case 3:
-                textDescription.text = "Fire attack twice";
+                textDescription.text = "Fire five shurikens twice in rapid succession";
+                chosen = "shuriken";
+                break;
+            default:
+                textDescription.text = "Max level reached";
+                chosen = "";
                 break;
         }
 
-        chosen = "shuriken";
-        //HighlightSelectedWeapon(0);
+        HighlightSelectedWeapon(0);
     }
 
     public void OnChakramLevelUp()
@@ -154,6 +182,12 @@ public class PauseHandler : MonoBehaviour
         {
             case 0:
                 textDescription.text = "Gain a chakram that spins around you";
+                break;
+            case 1:
+                textDescription.text = "Increase chakram damage";
+                break;
+            case 2:
+                textDescription.text = "Gain a second chakram that spins on the opposite side";
                 break;
         }
 
@@ -170,9 +204,6 @@ public class PauseHandler : MonoBehaviour
                 break;
             case 1:
                 textDescription.text = "Attack forward then backward";
-                break;
-            default:
-                textDescription.text = "Max level reached";
                 break;
         }
 
@@ -192,15 +223,21 @@ public class PauseHandler : MonoBehaviour
         {
             case 0:
                 textDescription.text = "Gain a lightning attack that strikes from the sky";
+                chosen = "lightning";
                 break;
             case 1:
                 textDescription.text = "Make lightning attack strike faster";
+                chosen = "lightning";
                 break;
             case 2:
                 textDescription.text = "Make lightning attack strike twice";
+                chosen = "lightning";
+                break;
+            default:
+                textDescription.text = "Max level reached";
+                chosen = "";
                 break;
         }
-        chosen = "lightning";
     }
 
     public void HighlightSelectedWeapon(int index)
@@ -231,6 +268,9 @@ public class PauseHandler : MonoBehaviour
             case "lightning":
                 if (Globals.lightningLevel !=  Globals.lightningMaxLevel) ApplyLightningUpgrade();
                 break;
+            default:
+                print("Cannot level");
+                break;
         }
 
         screenDim.SetActive(false);
@@ -239,19 +279,6 @@ public class PauseHandler : MonoBehaviour
         descriptionHolder.SetActive(false);
         ExperienceManager.isLeveling = false;
         created = false;
-    }
-
-    private void ApplyShurikenUpgrade()
-    {
-        switch (Globals.shurikenLevel)
-        {
-            case 1:
-                break;
-            case 2:
-                break;
-        }
-        //Globals.shurikenDamage += 10;
-        
     }
 
     private void ApplyLightningUpgrade()
@@ -269,14 +296,31 @@ public class PauseHandler : MonoBehaviour
                 player.GetComponent<LightningWeaponScript>().times = 2;
                 break;
         }
-        Globals.lightningDamage += 10;
+        //Globals.lightningDamage += 10;
         
     }
 
     private void ApplyChakramUpgrade()
     {
-        Globals.hasChakram = true;
-        Globals.chakramLevel = 1;
+        if (Globals.chakramLevel == 0)
+        {
+            Globals.hasChakram = true;
+            Globals.chakramLevel = 1;
+        }
+        else if (Globals.chakramLevel == 1)
+        {
+            Globals.chakramDamage += 10; // Increase the damage
+            Globals.chakramLevel = 2;
+        }
+        else if (Globals.chakramLevel == 2)
+        {
+            Globals.chakramLevel = 3;
+            PlayerScript playerScript = FindObjectOfType<PlayerScript>();
+            if (playerScript != null)
+            {
+                playerScript.SpawnSecondChakram();
+            }
+        }
     }
 
     private void ApplyMeleeUpgrade()

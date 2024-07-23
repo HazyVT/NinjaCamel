@@ -376,17 +376,17 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 731384149}
-  - {fileID: 33317367}
-  - {fileID: 213306299}
-  - {fileID: 2112804671}
-  - {fileID: 267411864}
-  - {fileID: 188530061}
   - {fileID: 1500497642}
   - {fileID: 188790276}
   - {fileID: 1198908218}
   - {fileID: 539599320}
   - {fileID: 384023011}
   - {fileID: 1337954508}
+  - {fileID: 33317367}
+  - {fileID: 213306299}
+  - {fileID: 2112804671}
+  - {fileID: 267411864}
+  - {fileID: 188530061}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2635,7 +2635,6 @@ MonoBehaviour:
   descriptionHolder: {fileID: 2112804670}
   textDescription: {fileID: 102863179}
   chooseButton: {fileID: 267411863}
-  healthDrop: {fileID: 6993735430378832147, guid: ca1c77e3de6a04a27a272633dd9a1f32, type: 3}
   upgradeChoices: []
   player: {fileID: 1015434068}
 --- !u!4 &713844985
@@ -3378,6 +3377,14 @@ PrefabInstance:
       propertyPath: cameraHolder
       value: 
       objectReference: {fileID: 534789338}
+    - target: {fileID: 4104972739805255250, guid: 49e04f30a407f444793866c969db58ed, type: 3}
+      propertyPath: movementSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4104972739805255250, guid: 49e04f30a407f444793866c969db58ed, type: 3}
+      propertyPath: secondOrbitWeapon
+      value: 
+      objectReference: {fileID: 2977607410841879412, guid: d4a806de5275af848882216a9fb5dc53, type: 3}
     - target: {fileID: 4104972739805255250, guid: 49e04f30a407f444793866c969db58ed, type: 3}
       propertyPath: meleeAttackTimeInterval
       value: 2

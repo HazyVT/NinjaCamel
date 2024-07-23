@@ -5,10 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
 public class PlayerScript : MonoBehaviour
 {
-
     public float movementSpeed;
     public float accelerationSpeed;
     public float deaccelerationSpeed;
@@ -36,13 +34,13 @@ public class PlayerScript : MonoBehaviour
     public SpriteRenderer sr;
     private Rigidbody2D rb;
 
-
-
     private float facing = 1;
     private int currentLevel;
 
     public GameObject orbitWeapon;
+    public GameObject secondOrbitWeapon; // Add this line
     private bool spawnedOrbit = false;
+    private bool spawnedSecondOrbit = false; // Add this line
 
     public ParticleSystem particleSystem;
     private float deathDuration = 1;
@@ -50,12 +48,16 @@ public class PlayerScript : MonoBehaviour
 
     public GameObject cameraHolder;
 
+    // Electric rod variables
+    public GameObject electricRodPrefab;
+    private ElectricRodScript electricRod;
+    public float electricRodDamage;
+    public float electricRodInterval;
+
     private float lightningDuration;
 
-    // Start is called before the first frame update
     void Start()
     {
-
         rb = GetComponent<Rigidbody2D>();
         bulletSpawningTimeInterval = Globals.shurikenFireSpeed;
         bulletSpawnDuration = bulletSpawningTimeInterval;
@@ -63,12 +65,15 @@ public class PlayerScript : MonoBehaviour
         HealthManager.health = health;
         meleeAttackDuration = meleeAttackTimeInterval;
         currentLevel = Globals.shurikenLevel;
-        movementSpeed = Globals.playerSpeed;
-        lightningDuration = Globals.lightningFireSpeed;
-        middleDuration = 0.4f;
-        firstSpawn = false;
 
-
+        // Initialize electric rod
+        if (electricRodPrefab != null)
+        {
+            GameObject rodInstance = Instantiate(electricRodPrefab, transform);
+            electricRod = rodInstance.GetComponent<ElectricRodScript>();
+            electricRod.damage = electricRodDamage;
+            electricRod.attackInterval = electricRodInterval;
+        }
     }
 
     // Update is called once per frame
@@ -136,7 +141,7 @@ public class PlayerScript : MonoBehaviour
                     }
 
 
-                    if (Globals.shurikenLevel == 3)
+                    if (Globals.shurikenLevel == 4)
                     {
 
                         middleDuration -= Time.deltaTime;
@@ -210,6 +215,17 @@ public class PlayerScript : MonoBehaviour
                 }
 
                 
+
+                if (Globals.chakramLevel == 3 && !spawnedSecondOrbit)
+                {
+                    SpawnSecondChakram();
+                }
+
+                // Electric rod attack
+                if (electricRod != null)
+                {
+                    electricRod.AttackNearestEnemy();
+                }
             }
 
             if (!particleHasPlayed) 
@@ -261,6 +277,27 @@ public class PlayerScript : MonoBehaviour
 
     }
 
+    private void SpawnOrbitingWeapon()
+    {
+        GameObject orbit = Instantiate(orbitWeapon, transform.position, Quaternion.identity);
+        orbit.GetComponent<OrbitingWeapon>().player = gameObject.transform;
+        orbit.GetComponent<OrbitingWeapon>().initialAngleOffset = 0; // Ensure the first orbit starts with 0 offset
+        spawnedOrbit = true;
+    }
+
+    public void SpawnSecondChakram()
+    {
+        if (!spawnedSecondOrbit)
+        {
+            GameObject secondChakram = Instantiate(secondOrbitWeapon, transform.position, Quaternion.identity);
+            OrbitingWeapon secondChakramScript = secondChakram.GetComponent<OrbitingWeapon>();
+            secondChakramScript.player = gameObject.transform;
+            secondChakramScript.initialAngleOffset = 180f; // Set the initial angle offset to 180 degrees
+            Debug.Log("Second Chakram Initial Angle Offset: " + secondChakramScript.initialAngleOffset);
+            spawnedSecondOrbit = true;
+        }
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (!hasCollided && collision.gameObject.CompareTag("Enemy"))
@@ -271,5 +308,55 @@ public class PlayerScript : MonoBehaviour
             HealthManager.changeHealth(-10);
         }
     }
+}
 
+public class ElectricRodScript : MonoBehaviour
+{
+    public float damage;
+    public float attackInterval;
+    private float attackCooldown;
+
+    void Start()
+    {
+        attackCooldown = 0;
+    }
+
+    void Update()
+    {
+        attackCooldown -= Time.deltaTime;
+        if (attackCooldown <= 0)
+        {
+            AttackNearestEnemy();
+            attackCooldown = attackInterval;
+        }
+    }
+
+    public void AttackNearestEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemies.Length == 0) return;
+
+        GameObject nearestEnemy = null;
+        float shortestDistance = Mathf.Infinity;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < shortestDistance)
+            {
+                shortestDistance = distanceToEnemy;
+                nearestEnemy = enemy;
+            }
+        }
+
+        if (nearestEnemy != null)
+        {
+            EnemyBehaviour enemyBehaviour = nearestEnemy.GetComponent<EnemyBehaviour>();
+            if (enemyBehaviour != null)
+            {
+                enemyBehaviour.OnBulletHit((int)damage, null); // Null because we're not using a specific bullet object
+                // Optional: Add visual or sound effects here
+            }
+        }
+    }
 }

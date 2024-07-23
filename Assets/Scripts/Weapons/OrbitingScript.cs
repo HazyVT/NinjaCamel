@@ -6,6 +6,7 @@ public class OrbitingWeapon : MonoBehaviour
     public float orbitDistance = 2.0f;
     public float orbitSpeed;
     public int damage;
+    public float initialAngleOffset = 0.0f; // Added this line
 
     private Rigidbody2D rb;
     private float angle;
@@ -19,6 +20,9 @@ public class OrbitingWeapon : MonoBehaviour
             Debug.LogError("Player transform not assigned.");
         }
         orbitSpeed = Globals.orbitSpeed;
+        damage = Globals.chakramDamage;
+        angle = initialAngleOffset; // Set the initial angle offset
+        Debug.Log("Initial Angle Offset: " + initialAngleOffset);
     }
 
     void FixedUpdate()
@@ -28,20 +32,16 @@ public class OrbitingWeapon : MonoBehaviour
         {
             OrbitAroundPlayer();
             rot += Time.deltaTime / 40;
-
-            transform.Rotate(new(0,0,100));
-
-            //transform.Rotate(new(0,0,rot));
-            
+            transform.Rotate(new(0, 0, 100));
         }
     }
 
     void OrbitAroundPlayer()
     {
         angle += orbitSpeed * Time.deltaTime;
-        if (angle >= 360f)
+        if (angle >= 360f || angle <= -360f)
         {
-            angle -= 360f;
+            angle = 0;
         }
 
         float x = Mathf.Cos(angle * Mathf.Deg2Rad) * orbitDistance;
@@ -50,15 +50,13 @@ public class OrbitingWeapon : MonoBehaviour
         Vector2 offset = new Vector2(x, y);
         Vector2 newPosition = player.position + (Vector3)offset;
 
-        // Use Rigidbody2D to set the position
         rb.MovePosition(newPosition);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))  // Ensure the enemy GameObject has the tag "Enemy"
+        if (other.CompareTag("Enemy"))
         {
-            // Call the ReduceHealth method from EnemyBehaviour
             other.GetComponent<EnemyBehaviour>().OnOrbitHit(damage);
         }
     }

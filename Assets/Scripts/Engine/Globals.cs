@@ -11,14 +11,15 @@ public class Globals
     public static int shurikenMaxLevel = 4;
     public static int meleeLMaxLevel = 2;
     public static int chakramMaxLevel = 3;
-    public static int lightningMaxLevel = 2;
 
     // Item variables
     public static float shurikenFireSpeed = 2;
+    public static int lightningMaxLevel = 2;
     public static float shurikenSize;
     public static int shurikenDamage = 10;
 
     public static float orbitSpeed = 50.0f;
+    public static int chakramDamage = 10; // Add this line for chakram damage
 
     public static float lightningFireSpeed = 2f;
     public static int lightningDamage = 10;
