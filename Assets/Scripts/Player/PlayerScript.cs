@@ -50,7 +50,6 @@ public class PlayerScript : MonoBehaviour
 
     // Electric rod variables
     public GameObject electricRodPrefab;
-    private ElectricRodScript electricRod;
     public float electricRodDamage;
     public float electricRodInterval;
 
@@ -65,15 +64,6 @@ public class PlayerScript : MonoBehaviour
         HealthManager.health = health;
         meleeAttackDuration = meleeAttackTimeInterval;
         currentLevel = Globals.shurikenLevel;
-
-        // Initialize electric rod
-        if (electricRodPrefab != null)
-        {
-            GameObject rodInstance = Instantiate(electricRodPrefab, transform);
-            electricRod = rodInstance.GetComponent<ElectricRodScript>();
-            electricRod.damage = electricRodDamage;
-            electricRod.attackInterval = electricRodInterval;
-        }
     }
 
     // Update is called once per frame
@@ -220,12 +210,6 @@ public class PlayerScript : MonoBehaviour
                 {
                     SpawnSecondChakram();
                 }
-
-                // Electric rod attack
-                if (electricRod != null)
-                {
-                    electricRod.AttackNearestEnemy();
-                }
             }
 
             if (!particleHasPlayed) 
@@ -306,57 +290,6 @@ public class PlayerScript : MonoBehaviour
             cameraHolder.GetComponent<CameraScript>().CauseShake(0.5f, 0.7f);
             sr.color = Color.red;
             HealthManager.changeHealth(-10);
-        }
-    }
-}
-
-public class ElectricRodScript : MonoBehaviour
-{
-    public float damage;
-    public float attackInterval;
-    private float attackCooldown;
-
-    void Start()
-    {
-        attackCooldown = 0;
-    }
-
-    void Update()
-    {
-        attackCooldown -= Time.deltaTime;
-        if (attackCooldown <= 0)
-        {
-            AttackNearestEnemy();
-            attackCooldown = attackInterval;
-        }
-    }
-
-    public void AttackNearestEnemy()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemies.Length == 0) return;
-
-        GameObject nearestEnemy = null;
-        float shortestDistance = Mathf.Infinity;
-
-        foreach (GameObject enemy in enemies)
-        {
-            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
-            {
-                shortestDistance = distanceToEnemy;
-                nearestEnemy = enemy;
-            }
-        }
-
-        if (nearestEnemy != null)
-        {
-            EnemyBehaviour enemyBehaviour = nearestEnemy.GetComponent<EnemyBehaviour>();
-            if (enemyBehaviour != null)
-            {
-                enemyBehaviour.OnBulletHit((int)damage, null); // Null because we're not using a specific bullet object
-                // Optional: Add visual or sound effects here
-            }
         }
     }
 }

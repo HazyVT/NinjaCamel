@@ -4923,9 +4923,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2173878686481104092}
-  - component: {fileID: 4104972739805255250}
   - component: {fileID: 8607611907632577026}
   - component: {fileID: 4646131857873800597}
+  - component: {fileID: 4104972739805255250}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4949,33 +4949,6 @@ Transform:
   - {fileID: 2044113534366207318}
   m_Father: {fileID: 8562067622950792418}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4104972739805255250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6711835918620169676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bfb5edbc4c4c4355a1ba41a686ca8de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 4
-  accelerationSpeed: 0.6
-  deaccelerationSpeed: 0.04
-  health: 100
-  invincibilityTime: 1
-  bulletSpawningTimeInterval: 2
-  bulletPrefab: {fileID: 857584222873999858, guid: 08272d52c4ab04ae0b4bfaf62e577a0f, type: 3}
-  bulletHolder: {fileID: 0}
-  meleeAttackTimeInterval: 0
-  meleePrefab: {fileID: 7287559712490927338, guid: be40022141b8949faaada59dd1f0d986, type: 3}
-  joystick: {fileID: 0}
-  sr: {fileID: 1400955637086494710}
-  orbitWeapon: {fileID: 2977607410841879412, guid: d4a806de5275af848882216a9fb5dc53, type: 3}
-  particleSystem: {fileID: 4897573208969839438}
-  cameraHolder: {fileID: 0}
 --- !u!61 &8607611907632577026
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5048,6 +5021,37 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4104972739805255250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6711835918620169676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bfb5edbc4c4c4355a1ba41a686ca8de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 4
+  accelerationSpeed: 0.6
+  deaccelerationSpeed: 0.04
+  health: 100
+  invincibilityTime: 1
+  bulletSpawningTimeInterval: 2
+  bulletPrefab: {fileID: 857584222873999858, guid: 08272d52c4ab04ae0b4bfaf62e577a0f, type: 3}
+  bulletHolder: {fileID: 0}
+  meleeAttackTimeInterval: 0
+  meleePrefab: {fileID: 7287559712490927338, guid: be40022141b8949faaada59dd1f0d986, type: 3}
+  joystick: {fileID: 0}
+  sr: {fileID: 1400955637086494710}
+  orbitWeapon: {fileID: 2977607410841879412, guid: d4a806de5275af848882216a9fb5dc53, type: 3}
+  secondOrbitWeapon: {fileID: 0}
+  particleSystem: {fileID: 4897573208969839438}
+  cameraHolder: {fileID: 0}
+  electricRodPrefab: {fileID: 0}
+  electricRodDamage: 0
+  electricRodInterval: 0
 --- !u!1 &8138172341539141570
 GameObject:
   m_ObjectHideFlags: 0
