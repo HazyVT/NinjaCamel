@@ -5038,7 +5038,7 @@ MonoBehaviour:
   deaccelerationSpeed: 0.04
   health: 100
   invincibilityTime: 1
-  bulletSpawningTimeInterval: 2
+  bulletSpawningTimeInterval: 1
   bulletPrefab: {fileID: 857584222873999858, guid: 08272d52c4ab04ae0b4bfaf62e577a0f, type: 3}
   bulletHolder: {fileID: 0}
   meleeAttackTimeInterval: 0

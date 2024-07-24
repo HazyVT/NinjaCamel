@@ -41,7 +41,7 @@ public class PauseHandler : MonoBehaviour
         Globals.lightningLevel = 0;
         ExperienceManager.ResetExperienceManager();
         WaveManager.wave = 1;
-        Globals.shurikenFireSpeed = 2;
+        Globals.shurikenFireSpeed = 1f;
         Globals.shurikenLevel = 1;
         Globals.lightningFireSpeed = 2;
 

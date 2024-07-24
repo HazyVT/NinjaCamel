@@ -13,7 +13,7 @@ public class Globals
     public static int chakramMaxLevel = 3;
 
     // Item variables
-    public static float shurikenFireSpeed = 2;
+    public static float shurikenFireSpeed = 1f;
     public static int lightningMaxLevel = 2;
     public static float shurikenSize;
     public static int shurikenDamage = 10;
