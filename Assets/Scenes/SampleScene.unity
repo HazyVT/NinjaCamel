@@ -2330,7 +2330,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 2
   field of view: 60
   orthographic: 1
   orthographic size: 15
@@ -2361,12 +2361,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
+  m_RenderShadows: 0
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -3848,6 +3848,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6711835918620169676, guid: 49e04f30a407f444793866c969db58ed, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1015434080}
+    - targetCorrespondingSourceObject: {fileID: 6711835918620169676, guid: 49e04f30a407f444793866c969db58ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1015434084}
   m_SourcePrefab: {fileID: 100100000, guid: 49e04f30a407f444793866c969db58ed, type: 3}
 --- !u!1 &1015434068 stripped
 GameObject:
@@ -3887,6 +3890,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shurikenPrefab: {fileID: 857584222873999858, guid: 08272d52c4ab04ae0b4bfaf62e577a0f, type: 3}
   shurikenHolder: {fileID: 1385928813}
+--- !u!114 &1015434084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015434068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888370b30827248769197fce4a573fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1028419705
 GameObject:
   m_ObjectHideFlags: 0

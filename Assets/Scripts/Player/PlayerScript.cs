@@ -122,7 +122,6 @@ public class PlayerScript : MonoBehaviour
                 }
             }
 
-            bulletSpawningTimeInterval = Globals.shurikenFireSpeed;
 
             float xscale = Utilities.Approach(transform.localScale.x, 1.2f, Time.deltaTime / 6);
             float yscale = Utilities.Approach(transform.localScale.y, 1.2f, Time.deltaTime / 6);
@@ -137,6 +136,8 @@ public class PlayerScript : MonoBehaviour
             {
                 sr.flipX = false;
             }
+            
+            bulletSpawningTimeInterval = Globals.shurikenFireSpeed;
 
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             if (enemies.Length != 0)
@@ -171,66 +172,12 @@ public class PlayerScript : MonoBehaviour
                         bulletSpawnDuration = bulletSpawningTimeInterval;
                         firstSpawn = false;
                     }
-
-                    
-
                 }
 
-                if (Globals.hasMelee)
+                // Chakram
+                if (Globals.hasChakram)
                 {
-                    meleeAttackDuration -= Time.deltaTime;
-
-                    if (meleeAttackDuration <= 0)
-                    {
-
-                        switch (Globals.meleeLevel)
-                        {
-                            case 1:
-                                Instantiate(meleePrefab, new(transform.position.x + facing * 2, transform.position.y, transform.position.z), Quaternion.identity, transform);
-                                meleeAttackDuration = meleeAttackTimeInterval;
-                                break;
-                            case 2:
-                            default:
-                                Instantiate(meleePrefab, new(transform.position.x + facing * 2, transform.position.y, transform.position.z), Quaternion.identity, transform);
-                                print("Melee");
-                                while (meleeWaitTime > 0)
-                                {
-                                    meleeWaitTime -= Time.deltaTime;
-                                }
-
-                                if (meleeWaitTime <= 0)
-                                {
-                                    Instantiate(meleePrefab, new(transform.position.x - facing * 2, transform.position.y, transform.position.z), Quaternion.identity, transform);
-                                    meleeWaitTime = 1;
-                                }
-                           
-                                meleeAttackDuration = meleeAttackTimeInterval;
-                                break;
-
-                        }
-                        
-                    }
-                }
-
-                switch (Globals.chakramLevel)
-                {
-                    case 1:
-                        if (Globals.hasChakram && spawnedOrbit == false)
-                        {
-                            orbitWeapon.GetComponent<OrbitingWeapon>().player = gameObject.transform;
-                            Instantiate(orbitWeapon, transform.position, Quaternion.identity);
-                            spawnedOrbit = true;
-                        }
-                        break;
-                    case 2:
-                        break;
-                }
-
-                
-
-                if (Globals.chakramLevel == 3 && !spawnedSecondOrbit)
-                {
-                    SpawnSecondChakram();
+                    GetComponent<ChakramScript>().SpawnChakram(orbitWeapon);
                 }
             }
 

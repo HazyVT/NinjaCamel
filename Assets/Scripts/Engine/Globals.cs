@@ -19,7 +19,7 @@ public class Globals
     public static int shurikenDamage = 10;
 
     public static float orbitSpeed = 50.0f;
-    public static int chakramDamage = 10; // Add this line for chakram damage
+    public static int chakramDamage = 10; 
 
     public static float lightningFireSpeed = 2f;
     public static int lightningDamage = 10;

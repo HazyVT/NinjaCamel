@@ -184,10 +184,13 @@ public class PauseHandler : MonoBehaviour
                 textDescription.text = "Gain a chakram that spins around you";
                 break;
             case 1:
-                textDescription.text = "Increase chakram damage";
+                textDescription.text = "Gain a second chakram";
                 break;
             case 2:
-                textDescription.text = "Gain a second chakram that spins on the opposite side";
+                textDescription.text = "Make chakrams spin faster";
+                break;
+            default:
+                textDescription.text = "Max level reached";
                 break;
         }
 
@@ -302,25 +305,16 @@ public class PauseHandler : MonoBehaviour
 
     private void ApplyChakramUpgrade()
     {
-        if (Globals.chakramLevel == 0)
-        {
+       switch (Globals.chakramLevel) {
+        case 0:
             Globals.hasChakram = true;
-            Globals.chakramLevel = 1;
-        }
-        else if (Globals.chakramLevel == 1)
-        {
-            Globals.chakramDamage += 10; // Increase the damage
-            Globals.chakramLevel = 2;
-        }
-        else if (Globals.chakramLevel == 2)
-        {
-            Globals.chakramLevel = 3;
-            PlayerScript playerScript = FindObjectOfType<PlayerScript>();
-            if (playerScript != null)
-            {
-                playerScript.SpawnSecondChakram();
-            }
-        }
+            break;
+        case 2:
+            Globals.orbitSpeed = 100;
+            break;
+       }
+
+        Globals.chakramLevel++;
     }
 
     private void ApplyMeleeUpgrade()

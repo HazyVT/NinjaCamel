@@ -9,7 +9,7 @@ public class OrbitingWeapon : MonoBehaviour
     public float initialAngleOffset = 0.0f; // Added this line
 
     private Rigidbody2D rb;
-    private float angle;
+    public float angle;
     private float rot;
 
     void Start()

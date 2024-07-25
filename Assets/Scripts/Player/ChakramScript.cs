@@ -6,6 +6,7 @@ public class ChakramScript : MonoBehaviour
 {
 
     private bool spawnedChakram = false;
+    private bool spawnedSecondChakram = false;
     private int chakramCount = 0;
 
     public void SpawnChakram(GameObject chakram)
@@ -17,9 +18,15 @@ public class ChakramScript : MonoBehaviour
             spawnedChakram = true;
             chakramCount = 1;
         } 
-        else if (Globals.chakramLevel == 2)
+        else if (Globals.chakramLevel == 2 && !spawnedSecondChakram)
         {
-            
+            float firstChakramAngle = chakram.GetComponent<OrbitingWeapon>().angle;
+            float secondChakramAngle = firstChakramAngle + 180;
+            GameObject secondChakram = Instantiate(chakram, transform.position, Quaternion.identity);
+            secondChakram.GetComponent<OrbitingWeapon>().player = gameObject.transform;
+            secondChakram.GetComponent<OrbitingWeapon>().angle = secondChakramAngle;
+            spawnedSecondChakram = true;
+
         }
     }
 }
