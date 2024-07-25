@@ -21,7 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
     public GameObject hit10;
     public GameObject hit20;
 
-    //private AudioSource hitSound;
+    public GameObject hitSound;
     private float hitDuration;
     private float hitTime = 0.3f;
     private bool hasBeenHit = false;
@@ -65,8 +65,9 @@ public class EnemyBehaviour : MonoBehaviour
 
                 if (hitDuration <= 0)
                 {
-                    //hitSound.Stop();
+                    hitSound.SetActive(false);
                     hitDuration = hitTime;
+                    hasBeenHit = false;
                 }
             }
         }
@@ -89,6 +90,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (health <= 0)
         {
             CreateDust();
+            hitSound.SetActive(true);
             Instantiate(xpPrefab, transform.position, Quaternion.identity, holder.transform);
             Destroy(gameObject);
             sr.transform.localScale = new Vector3(0, 0, 0);
@@ -96,14 +98,6 @@ public class EnemyBehaviour : MonoBehaviour
             //hitSound.Play();
             hitDuration = hitTime;
             hasBeenHit = true;
-
-            /*
-            ExperienceManager.ChangeExperience(10);
-            if (ExperienceManager.experience >= ExperienceManager.requiredExperience)
-            {
-                ExperienceManager.GainLevel();
-            }
-            */
         }
     }
 
@@ -123,6 +117,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (health <= 0)
         {
             CreateDust();
+            hitSound.SetActive(true);
             hitParticle.Play();
             Instantiate(xpPrefab, transform.position, Quaternion.identity, holder.transform);
             Destroy(gameObject);

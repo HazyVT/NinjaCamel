@@ -13,6 +13,8 @@ public class EnemySpawner : MonoBehaviour
     public GameObject[] waveOneEnemyArray;
     public GameObject[] waveTwoEnemyArray;
     public GameObject[] waveThreeEnemyArray;
+    public GameObject[] waveFourEnemyArray;
+    public GameObject[] waveFiveEnemyArray;
 
     //public GameObject enemyChoiceOne;
     //public GameObject enemyChoiceTwo;
@@ -50,6 +52,12 @@ public class EnemySpawner : MonoBehaviour
             case 3:
                 enemyArray = waveThreeEnemyArray;
                 break;
+            case 4:
+                enemyArray = waveFourEnemyArray;
+                break;
+           default:
+                enemyArray = waveFiveEnemyArray;
+                break;
         }
 
         if (!ExperienceManager.isLeveling)
@@ -86,7 +94,7 @@ public class EnemySpawner : MonoBehaviour
 
     private GameObject FindSpawnPoint()
     {
-        if (joystick.Horizontal > 0.5)
+        if (joystick.Horizontal > 0.5 && player.transform.position.x !>= 24)
         {
             if (joystick.Vertical < -0.5)
             {
@@ -98,7 +106,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 return spawnPointArray[4];
             }
-        } else if (joystick.Horizontal < -0.5)
+        } else if (joystick.Horizontal < -0.5 && player.transform.position.x !<= -24)
         {
             if (joystick.Vertical < -0.5)
             {

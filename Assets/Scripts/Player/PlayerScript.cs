@@ -230,27 +230,6 @@ public class PlayerScript : MonoBehaviour
 
     }
 
-    private void SpawnOrbitingWeapon()
-    {
-        GameObject orbit = Instantiate(orbitWeapon, transform.position, Quaternion.identity);
-        orbit.GetComponent<OrbitingWeapon>().player = gameObject.transform;
-        orbit.GetComponent<OrbitingWeapon>().initialAngleOffset = 0; // Ensure the first orbit starts with 0 offset
-        spawnedOrbit = true;
-    }
-
-    public void SpawnSecondChakram()
-    {
-        if (!spawnedSecondOrbit)
-        {
-            GameObject secondChakram = Instantiate(secondOrbitWeapon, transform.position, Quaternion.identity);
-            OrbitingWeapon secondChakramScript = secondChakram.GetComponent<OrbitingWeapon>();
-            secondChakramScript.player = gameObject.transform;
-            secondChakramScript.initialAngleOffset = 180f; // Set the initial angle offset to 180 degrees
-            Debug.Log("Second Chakram Initial Angle Offset: " + secondChakramScript.initialAngleOffset);
-            spawnedSecondOrbit = true;
-        }
-    }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (!hasCollided && collision.gameObject.CompareTag("Enemy"))

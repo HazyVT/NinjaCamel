@@ -308,13 +308,17 @@ public class PauseHandler : MonoBehaviour
        switch (Globals.chakramLevel) {
         case 0:
             Globals.hasChakram = true;
+            Globals.chakramLevel++;
+            break;
+        case 1:
+            Globals.chakramLevel++;
             break;
         case 2:
             Globals.orbitSpeed = 100;
+            Globals.chakramLevel++;
             break;
        }
 
-        Globals.chakramLevel++;
     }
 
     private void ApplyMeleeUpgrade()
