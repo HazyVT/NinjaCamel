@@ -14,7 +14,6 @@ public class TutorialScript : MonoBehaviour
     void Update()
     {
         Touch touch = Input.GetTouch(0);
-
         if (touch.phase == TouchPhase.Began) {
             gameObject.SetActive(false);
         }
