@@ -1,13 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HomeScreen : MonoBehaviour
 {
+    public AudioManager audioManager;
+
     public void LoadSampleScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        if (audioManager != null)
+        {
+            audioManager.PlayTransitionMusic();
+        }
+        else
+        {
+            Debug.LogError("AudioManager is not assigned in the HomeScreen script.");
+        }
     }
 }

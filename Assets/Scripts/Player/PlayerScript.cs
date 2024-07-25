@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -48,6 +49,11 @@ public class PlayerScript : MonoBehaviour
 
     public GameObject cameraHolder;
 
+    public GameObject damagedSound;
+    private bool damagedIsPlaying = false;
+    private float soundDuration = 1f;
+    private float timer;
+
     // Electric rod variables
     public GameObject electricRodPrefab;
     public float electricRodDamage;
@@ -64,6 +70,7 @@ public class PlayerScript : MonoBehaviour
         HealthManager.health = health;
         meleeAttackDuration = meleeAttackTimeInterval;
         currentLevel = Globals.shurikenLevel;
+        timer = soundDuration;
     }
 
     // Update is called once per frame
@@ -71,6 +78,21 @@ public class PlayerScript : MonoBehaviour
     {
         if (!ExperienceManager.isLeveling)
         {
+
+            if (damagedIsPlaying)
+            {
+                timer -= Time.deltaTime;
+
+                if (timer <= 0)
+                {
+                    damagedSound.SetActive(false);
+                    damagedIsPlaying = false;
+                    timer = soundDuration;
+                }
+
+
+            }
+
             movementSpeed = Globals.playerSpeed;
 
             if (HealthManager.health <= 0 && !particleHasPlayed)
@@ -286,6 +308,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (!hasCollided && collision.gameObject.CompareTag("Enemy"))
         {
+            damagedSound.SetActive(true);
+            damagedIsPlaying = true;
             hasCollided = true;
             cameraHolder.GetComponent<CameraScript>().CauseShake(0.5f, 0.7f);
             sr.color = Color.red;
