@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
@@ -42,6 +43,16 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (!ExperienceManager.isLeveling)
         {
+
+            /*
+            if (transform.position.x > 30 || transform.position.x < 30 || transform.position.y > 20 || transform.position.y < -20)
+            {
+                float _xpos = UnityEngine.Random.Range(-25, 25);
+                float _ypos = UnityEngine.Random.Range(-15, 15);
+                transform.position = new(_xpos, _ypos);
+            }
+            */
+
             rb.position = Vector2.MoveTowards(rb.position, player.transform.position, speed * Time.deltaTime);
             Vector2 diff = rb.position - (Vector2)player.transform.position;
             int horizontalCheck = (int)Mathf.Sign(diff.x);
@@ -154,5 +165,24 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision) 
+    {
+        if (collision.gameObject.CompareTag("Wall")) {
+            transform.position = FindNewPosition();
+        }
+    }
+
+    private Vector2 FindNewPosition() 
+    {
+        int rMin = 5;
+        int rMax = 6;
+        float theta = Time.deltaTime * 100;
+        int r = UnityEngine.Random.Range(rMin, rMax);
+        int f = UnityEngine.Random.Range(0,2);
+        if (f == 0) f = -1;
+        float x = player.transform.position.x + f * (r * Mathf.Cos(theta));
+        float y = player.transform.position.y + f * (r * Mathf.Sin(theta));
+        return new(x,y);
+    }
 }
 

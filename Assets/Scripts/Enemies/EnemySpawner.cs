@@ -22,6 +22,8 @@ public class EnemySpawner : MonoBehaviour
     private float totalTime = 0;
     public Joystick joystick;
 
+    private float time;
+
     private float fullTime;
     private float duration;
 
@@ -40,6 +42,7 @@ public class EnemySpawner : MonoBehaviour
     {
         //float waveTime = WaveManager.wave / 2;
         fullTime = timeInterval;
+        time += Time.deltaTime;
 
         switch (WaveManager.wave)
         {
@@ -74,7 +77,7 @@ public class EnemySpawner : MonoBehaviour
                     int randomEnemyChoice = Random.Range(0, enemyArray.Length);
                     GameObject toSpawn = enemyArray[randomEnemyChoice];
                     GameObject spawnPoint = FindSpawnPoint();
-                    Vector3 spawnPosition = new(spawnPoint.transform.position.x + (Random.insideUnitSphere.x * 4), spawnPoint.transform.position.y + (Random.insideUnitSphere.y * 4), spawnPoint.transform.position.z);
+                    Vector3 spawnPosition = new(spawnPoint.transform.position.x + (Random.insideUnitSphere.x * 4), spawnPoint.transform.position.y + (Random.insideUnitSphere.y * 4), 0);
                     Instantiate(toSpawn, spawnPosition, Quaternion.identity, enemyHolder.transform);
                 }
 
@@ -94,8 +97,10 @@ public class EnemySpawner : MonoBehaviour
 
     private GameObject FindSpawnPoint()
     {
-        if (joystick.Horizontal > 0.5 && player.transform.position.x !>= 24)
+        
+        if (joystick.Horizontal > 0.5)
         {
+            print("ToRight");
             if (joystick.Vertical < -0.5)
             {
                 return spawnPointArray[2];
@@ -106,8 +111,10 @@ public class EnemySpawner : MonoBehaviour
             {
                 return spawnPointArray[4];
             }
-        } else if (joystick.Horizontal < -0.5 && player.transform.position.x !<= -24)
+            
+        } else if (joystick.Horizontal < -0.5)
         {
+            print("ToLeft");
             if (joystick.Vertical < -0.5)
             {
                 return spawnPointArray[0];
@@ -128,9 +135,13 @@ public class EnemySpawner : MonoBehaviour
                 return spawnPointArray[6];
             } else
             {
-                int rand = Random.Range(0, 8);
-                return spawnPointArray[rand];
+                return GetRandom();
             }
         }
+    }
+
+    private GameObject GetRandom() {
+        int rand = Random.Range(0, 8);
+        return spawnPointArray[rand];
     }
 }
