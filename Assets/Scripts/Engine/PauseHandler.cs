@@ -48,6 +48,8 @@ public class PauseHandler : MonoBehaviour
         Globals.shurikenFireSpeed = 1f;
         Globals.shurikenLevel = 1;
         Globals.lightningFireSpeed = 2;
+        Globals.gameTime = 0;
+        Globals.enemeisDefeated = 0;
 
         weapons.Add("shuriken");
         weapons.Add("chakram");

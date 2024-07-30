@@ -108,6 +108,7 @@ public class EnemyBehaviour : MonoBehaviour
             //hitSound.SetActive(true);
             //hitSound.Play();
             hitDuration = hitTime;
+            Globals.enemeisDefeated++;
             hasBeenHit = true;
         }
     }
@@ -133,6 +134,7 @@ public class EnemyBehaviour : MonoBehaviour
             Instantiate(xpPrefab, transform.position, Quaternion.identity, holder.transform);
             Destroy(gameObject);
             sr.transform.localScale = new Vector3(0, 0, 0);
+            Globals.enemeisDefeated++;
 
 
         }

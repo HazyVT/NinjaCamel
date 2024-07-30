@@ -28,6 +28,7 @@ public class Globals
     public static float playerSpeed = 4;
 
     public static float gameTime = 0;
+    public static int enemeisDefeated = 0;
 
     
 }

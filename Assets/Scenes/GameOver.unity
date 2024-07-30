@@ -131,7 +131,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 161660541}
-  - component: {fileID: 161660540}
   m_Layer: 0
   m_Name: GameTimer
   m_TagString: Untagged
@@ -139,19 +138,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &161660540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161660539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01745a1a090f1fc4bbf107c5a610680a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerText: {fileID: 227742313}
 --- !u!4 &161660541
 Transform:
   m_ObjectHideFlags: 0
@@ -257,6 +243,7 @@ GameObject:
   - component: {fileID: 227742311}
   - component: {fileID: 227742314}
   - component: {fileID: 227742313}
+  - component: {fileID: 227742315}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -280,7 +267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: 335}
+  m_AnchoredPosition: {x: 180, y: 338}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &227742313
@@ -380,6 +367,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227742310}
   m_CullTransparentMesh: 1
+--- !u!114 &227742315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227742310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa393d7ec2604af1958fa3793ae3511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &364465821
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,6 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ff23e8081264a43afa5027791eaf65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyText: {fileID: 1740803143}
 --- !u!1 &392134693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,7 +1450,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
