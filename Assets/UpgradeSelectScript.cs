@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class WeaponUIBehaviour : MonoBehaviour, IPointerDownHandler
+public class UpgradeSelectScript : MonoBehaviour, IPointerDownHandler
 {
 
     public GameObject gameHandler;
@@ -14,9 +14,11 @@ public class WeaponUIBehaviour : MonoBehaviour, IPointerDownHandler
     // Start is called before the first frame update
     void Start()
     {
-       
-
-
+        Physics2DRaycaster physics2DRaycaster = FindObjectOfType<Physics2DRaycaster>();
+        if (physics2DRaycaster == null) 
+        {
+            Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
+        }
     }
 
     // Update is called once per frame
@@ -30,8 +32,8 @@ public class WeaponUIBehaviour : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData data)
     {
-        print("Clicking");
-        //Debug.Log("Clicked " + data.pointerCurrentRaycast.gameObject.name);
-       //gameHandler.GetComponent<PauseHandler>().HighlightSelectedWeapon(number);
+
+        print("Clicking " + number.ToString());
+        gameHandler.GetComponent<PauseHandler>().ChosenButtonClick(number);
     }
 }

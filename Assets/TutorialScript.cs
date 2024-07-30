@@ -13,9 +13,12 @@ public class TutorialScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Touch touch = Input.GetTouch(0);
-        if (touch.phase == TouchPhase.Began) {
-            gameObject.SetActive(false);
+        if (Input.touchCount > 0) {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began) {
+                gameObject.SetActive(false);
+            }
         }
+        
     }
 }

@@ -16,9 +16,9 @@ public class PauseHandler : MonoBehaviour
     public Sprite sandalImage;
     public Sprite thunderImage;
 
-    public TextMeshPro[] weaponNames;
+    public GameObject[] weaponNames;
     public GameObject[] weaponImages;
-    public TextMeshPro[] weaponDescriptions;
+    public GameObject[] weaponDescriptions;
     public GameObject weaponImageHolder;
 
     public GameObject descriptionHolder;
@@ -26,7 +26,7 @@ public class PauseHandler : MonoBehaviour
     public GameObject chooseButton;
 
     private static bool created;
-    private string chosen;
+    public string chosen;
 
     private List<string> weapons = new();
     public List<string> upgradeChoices = new();
@@ -99,16 +99,15 @@ public class PauseHandler : MonoBehaviour
                 if (image != null)
                 {
                     weaponImages[i].GetComponent<Image>().sprite = image;
-                    weaponNames[i].text = choice;
-                    weaponDescriptions[i].text = description;
+                    weaponNames[i].GetComponent<TextMeshProUGUI>().text = choice;
+                    weaponDescriptions[i].GetComponent<TextMeshProUGUI>().text = description;
 
                 }
 
             }
 
             //ShowLevelUpOptions();
-            HighlightSelectedWeapon(0);
-            descriptionHolder.SetActive(true);
+            //descriptionHolder.SetActive(true);
             //chooseButton.SetActive(true);
             weaponImageHolder.SetActive(true);
             created = true;
@@ -139,7 +138,7 @@ public class PauseHandler : MonoBehaviour
                 break;
         }
 
-        chosen = "shuriken";
+        //chosen = "shuriken";
         return txt;
 
     }
@@ -164,7 +163,7 @@ public class PauseHandler : MonoBehaviour
                 break;
         }
 
-        chosen = "chakram";
+        //chosen = "chakram";
         return txt;
         //HighlightSelectedWeapon(1);
     }
@@ -189,7 +188,7 @@ public class PauseHandler : MonoBehaviour
 
     public string OnSandalLevelUp() 
     {
-        chosen = "sandal";
+        //chosen = "sandal";
         return "Increase movement speed";
     }
 
@@ -201,37 +200,27 @@ public class PauseHandler : MonoBehaviour
         {
             case 0:
                 txt = "Gain a lightning attack that strikes from the sky";
-                chosen = "lightning";
                 break;
             case 1:
                 txt = "Make lightning attack strike faster";
-                chosen = "lightning";
                 break;
             case 2:
                 txt = "Make lightning attack strike twice";
-                chosen = "lightning";
                 break;
             default:
                 txt = "Max level reached";
-                chosen = "";
                 break;
         }
 
         return txt;
     }
 
-    public void HighlightSelectedWeapon(int index)
+    public void ChosenButtonClick(int index)
     {
-        for (int i = 0; i < weaponImages.Length; i++)
-        {
-            weaponImages[i].transform.localScale = new Vector3(1, 1, 1);
-        }
-        weaponImages[index].transform.localScale = new Vector3(1.5f, 1.5f, 1f);
-    }
-
-    public void ChosenButtonClick()
-    {
-        switch (chosen)
+        string choose = upgradeChoices[index];
+        print(choose);
+        
+        switch (choose)
         {
             case "shuriken":
                 if (Globals.shurikenLevel != Globals.shurikenMaxLevel) Globals.shurikenLevel++;
@@ -255,8 +244,8 @@ public class PauseHandler : MonoBehaviour
 
         screenDim.SetActive(false);
         weaponImageHolder.SetActive(false);
-        chooseButton.SetActive(false);
-        descriptionHolder.SetActive(false);
+        //chooseButton.SetActive(false);
+        //descriptionHolder.SetActive(false);
         ExperienceManager.isLeveling = false;
         created = false;
     }
