@@ -44,7 +44,7 @@ public class WeaponUIBehaviour : MonoBehaviour, IPointerDownHandler
                 gameHandler.GetComponent<PauseHandler>().OnChakramLevelUp();
                 break;
             case "melee":
-                gameHandler.GetComponent<PauseHandler>().OnMeleeLevelUp();
+                //gameHandler.GetComponent<PauseHandler>().OnMeleeLevelUp();
                 break;
             case "sandal":
                 gameHandler.GetComponent<PauseHandler>().OnSandalLevelUp();

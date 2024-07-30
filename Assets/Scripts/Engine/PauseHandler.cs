@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,9 @@ public class PauseHandler : MonoBehaviour
     public Sprite sandalImage;
     public Sprite thunderImage;
 
+    public TextMeshPro[] weaponNames;
     public GameObject[] weaponImages;
+    public TextMeshPro[] weaponDescriptions;
     public GameObject weaponImageHolder;
 
     public GameObject descriptionHolder;
@@ -47,7 +50,7 @@ public class PauseHandler : MonoBehaviour
 
         weapons.Add("shuriken");
         weapons.Add("chakram");
-        weapons.Add("melee");
+        //weapons.Add("melee");
         weapons.Add("sandal");   
         weapons.Add("lightning");     
     }
@@ -66,139 +69,108 @@ public class PauseHandler : MonoBehaviour
             {
                 string choice = upgrades[i];
                 Sprite image = null;
+                string description = "";
 
                 switch (choice)
                 {
                     case "shuriken":
                         image = shurikenImage;
+                        description = OnShurikenLevelUp();
                         break;
                     case "chakram":
+                        description = OnChakramLevelUp();
                         image = chakramImage;
                         break;
+                    /*
                     case "melee":
                         image = swordImage;
                         break;
+                    */
                     case "sandal":
                         image = sandalImage;
+                        description = OnSandalLevelUp();
                         break;
                     case "lightning":
                         image = thunderImage;
+                        description = OnLightningLevelUp();
                         break;
                 }
 
                 if (image != null)
                 {
                     weaponImages[i].GetComponent<Image>().sprite = image;
+                    weaponNames[i].text = choice;
+                    weaponDescriptions[i].text = description;
+
                 }
 
-            }
-
-            switch (chosen)
-            {
-                case "shuriken":
-                    OnShurikenLevelUp();
-                    break;
-                case "chakram":
-                    OnChakramLevelUp();
-                    break;
-                case "melee":
-                    OnMeleeLevelUp();
-                    break;
-                case "sandal":
-                    OnSandalLevelUp();
-                    break;
-                case "lightning":
-                    OnLightningLevelUp();
-                    break;
             }
 
             //ShowLevelUpOptions();
             HighlightSelectedWeapon(0);
             descriptionHolder.SetActive(true);
-            chooseButton.SetActive(true);
+            //chooseButton.SetActive(true);
             weaponImageHolder.SetActive(true);
             created = true;
-
         }
     }
 
-
-    private void ShowLevelUpOptions()
+    public string OnShurikenLevelUp()
     {
-        // Ensure all options are visible at the start
-        for (int i = 0; i < weaponImages.Length; i++)
-        {
-            weaponImages[i].SetActive(true);
-        }
+        string txt;
 
-        if (Globals.shurikenLevel < 2)
-        {
-            OnShurikenLevelUp();
-        }
-
-        if (Globals.chakramLevel < 3)
-        {
-            OnChakramLevelUp();
-        }
-
-        if (Globals.meleeLevel < 2)
-        {
-            OnMeleeLevelUp();
-        }
-        else
-        {
-            weaponImages[2].SetActive(false);
-        }
-    }
-
-    public void OnShurikenLevelUp()
-    {
         switch (Globals.shurikenLevel)
         {
             case 1:
-                textDescription.text = "Fire three shurikens at once";
+                txt = "Fire three shurikens at once";
                 chosen = "shuriken";
                 break;
             case 2:
-                textDescription.text = "Fire five shurikens at once";
+                txt = "Fire five shurikens at once";
                 chosen = "shuriken";
                 break;
             case 3:
-                textDescription.text = "Fire five shurikens twice in rapid succession";
+                txt = "Fire five shurikens twice in rapid succession";
                 chosen = "shuriken";
                 break;
             default:
-                textDescription.text = "Max level reached";
+                txt = "Max level reached";
                 chosen = "";
                 break;
         }
 
-        HighlightSelectedWeapon(0);
+        chosen = "shuriken";
+        return txt;
+
     }
 
-    public void OnChakramLevelUp()
+    public string OnChakramLevelUp()
     {
+        string txt;
+
         switch (Globals.chakramLevel)
         {
             case 0:
-                textDescription.text = "Gain a chakram that spins around you";
+                txt = "Gain a chakram that spins around you";
                 break;
             case 1:
-                textDescription.text = "Gain a second chakram";
+                txt = "Gain a second chakram";
                 break;
             case 2:
-                textDescription.text = "Make chakrams spin faster";
+                txt  = "Make chakrams spin faster";
                 break;
             default:
-                textDescription.text = "Max level reached";
+                txt = "Max level reached";
                 break;
         }
 
         chosen = "chakram";
+        return txt;
         //HighlightSelectedWeapon(1);
     }
 
-    public void OnMeleeLevelUp()
+    /*
+    public string OnMeleeLevelUp()
     {
         switch (Globals.meleeLevel)
         {
@@ -213,34 +185,39 @@ public class PauseHandler : MonoBehaviour
         chosen = "melee";
         //HighlightSelectedWeapon(2);
     }
+    */
 
-    public void OnSandalLevelUp() 
+    public string OnSandalLevelUp() 
     {
-        textDescription.text = "Increase movement speed";
         chosen = "sandal";
+        return "Increase movement speed";
     }
 
-    public void OnLightningLevelUp()
+    public string OnLightningLevelUp()
     {
+        string txt;
+
         switch (Globals.lightningLevel)
         {
             case 0:
-                textDescription.text = "Gain a lightning attack that strikes from the sky";
+                txt = "Gain a lightning attack that strikes from the sky";
                 chosen = "lightning";
                 break;
             case 1:
-                textDescription.text = "Make lightning attack strike faster";
+                txt = "Make lightning attack strike faster";
                 chosen = "lightning";
                 break;
             case 2:
-                textDescription.text = "Make lightning attack strike twice";
+                txt = "Make lightning attack strike twice";
                 chosen = "lightning";
                 break;
             default:
-                textDescription.text = "Max level reached";
+                txt = "Max level reached";
                 chosen = "";
                 break;
         }
+
+        return txt;
     }
 
     public void HighlightSelectedWeapon(int index)
