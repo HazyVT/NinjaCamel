@@ -9,12 +9,12 @@ public class XP : MonoBehaviour
     public float attractRadius = 5f; // Radius within which the XP will be attracted to the player
     public float attractSpeed = 5f; // Speed at which the XP moves towards the player
 
-    private Transform playerTransform;
+    private GameObject playerTransform;
 
     void Start()
     {
         // Find the player object by tag and get its transform
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
@@ -30,11 +30,11 @@ public class XP : MonoBehaviour
         if (playerTransform == null) return;
 
         // Calculate the distance between the XP object and the player
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.transform.position);
         if (distanceToPlayer <= attractRadius)
         {
             // Move the XP towards the player
-            transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, attractSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, playerTransform.transform.position, attractSpeed * Time.deltaTime);
         }
     }
 
@@ -42,6 +42,8 @@ public class XP : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            playerTransform.GetComponent<PlayerScript>().xpSound.SetActive(true);
+            playerTransform.GetComponent<PlayerScript>().xpIsPlaying = true;
             // Increase the player's experience
             ExperienceManager.ChangeExperience(xpAmount);
 

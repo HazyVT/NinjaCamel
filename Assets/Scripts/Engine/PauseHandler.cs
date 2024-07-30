@@ -17,6 +17,7 @@ public class PauseHandler : MonoBehaviour
     public Sprite thunderImage;
 
     public GameObject[] weaponNames;
+
     public GameObject[] weaponImages;
     public GameObject[] weaponDescriptions;
     public GameObject weaponImageHolder;

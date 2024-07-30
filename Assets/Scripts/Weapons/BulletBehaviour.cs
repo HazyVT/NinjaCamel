@@ -76,7 +76,7 @@ public class BulletBehaviour : MonoBehaviour
             {
                 tmin = tform;
                 minDist = dist;
-                closestEnemy = enemy;
+                closestEnemy = enemy; 
                 movementVector = (enemy.transform.position - position).normalized;
             }
 

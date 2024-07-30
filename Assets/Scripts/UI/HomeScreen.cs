@@ -17,4 +17,9 @@ public class HomeScreen : MonoBehaviour
             Debug.LogError("AudioManager is not assigned in the HomeScreen script.");
         }
     }
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
 }

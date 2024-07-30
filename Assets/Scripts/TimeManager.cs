@@ -13,8 +13,10 @@ public class GameTimer : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             UpdateTimerText(elapsedTime);
+
+            Globals.gameTime = elapsedTime;
         }
-        
+
     }
 
     void UpdateTimerText(float time)

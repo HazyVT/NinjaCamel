@@ -35,7 +35,7 @@ public class EnemyBehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //hitSound = GetComponent<AudioSource>();
         //hitSound.Stop();
-        
+
     }
 
     // Update is called once per frame
@@ -165,24 +165,26 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) 
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wall")) {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
             transform.position = FindNewPosition();
         }
     }
 
-    private Vector2 FindNewPosition() 
+    private Vector2 FindNewPosition()
     {
         int rMin = 5;
         int rMax = 6;
         float theta = Time.deltaTime * 100;
         int r = UnityEngine.Random.Range(rMin, rMax);
-        int f = UnityEngine.Random.Range(0,2);
+        int f = UnityEngine.Random.Range(0, 2);
         if (f == 0) f = -1;
         float x = player.transform.position.x + f * (r * Mathf.Cos(theta));
         float y = player.transform.position.y + f * (r * Mathf.Sin(theta));
-        return new(x,y);
+        return new(x, y);
     }
 }
+
 

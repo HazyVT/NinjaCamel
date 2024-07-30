@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class LightningWeaponScript : MonoBehaviour
 {
-
     private float duration;
     public GameObject lightningPrefab;
     private bool firstSpawn;
     private float middleDuration;
-
     public int times = 1;
 
-    // Start is called before the first frame update
+    private PlayerScript playerScript;
+
     void Start()
     {
         duration = Globals.lightningFireSpeed;
         middleDuration = 0.4f;
+
+        // Find the PlayerScript component
+        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
     }
 
     public void StrikeLightning()
@@ -37,7 +39,8 @@ public class LightningWeaponScript : MonoBehaviour
                 duration = Globals.lightningFireSpeed;
                 firstSpawn = false;
             }
-        } else
+        }
+        else
         {
             duration = Globals.lightningFireSpeed;
             firstSpawn = false;
@@ -58,7 +61,6 @@ public class LightningWeaponScript : MonoBehaviour
                 minDist = dist;
                 closest = enemy;
             }
-
         }
 
         return closest;
@@ -67,8 +69,14 @@ public class LightningWeaponScript : MonoBehaviour
     private void SpawnLightning()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemies.Length == 0) return;
+
         GameObject closest = FindClosestEnemy(enemies, transform.position);
         Instantiate(lightningPrefab, closest.transform.position, Quaternion.identity);
         closest.GetComponent<EnemyBehaviour>().OnOrbitHit(Globals.lightningDamage);
+
+        // Play the thunder sound
+        playerScript.thunderSound.SetActive(true);
+        playerScript.thunderIsPlaying = true;
     }
 }

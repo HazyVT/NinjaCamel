@@ -78,7 +78,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.92, y: 6.12}
+  m_Size: {x: 1.84, y: 1.83}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -5047,12 +5047,18 @@ MonoBehaviour:
   sr: {fileID: 1400955637086494710}
   orbitWeapon: {fileID: 2977607410841879412, guid: d4a806de5275af848882216a9fb5dc53, type: 3}
   secondOrbitWeapon: {fileID: 0}
+  orbitWeapon: {fileID: 2977607410841879412, guid: d4a806de5275af848882216a9fb5dc53,
+    type: 3}
+  secondOrbitWeapon: {fileID: 0}
+  orbitWeapon: {fileID: 2977607410841879412, guid: d4a806de5275af848882216a9fb5dc53, type: 3}
+  secondOrbitWeapon: {fileID: 2977607410841879412, guid: d4a806de5275af848882216a9fb5dc53, type: 3}
   particleSystem: {fileID: 4897573208969839438}
   cameraHolder: {fileID: 0}
   damagedSound: {fileID: 0}
-  electricRodPrefab: {fileID: 0}
-  electricRodDamage: 0
-  electricRodInterval: 0
+  xpSound: {fileID: 0}
+  xpIsPlaying: 0
+  thunderSound: {fileID: 0}
+  thunderIsPlaying: 0
 --- !u!1 &8138172341539141570
 GameObject:
   m_ObjectHideFlags: 0

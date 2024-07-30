@@ -26,4 +26,8 @@ public class Globals
 
     // Player variables
     public static float playerSpeed = 4;
+
+    public static float gameTime = 0;
+
+    
 }
