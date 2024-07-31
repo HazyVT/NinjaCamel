@@ -21,7 +21,21 @@ public class ChakramScript : MonoBehaviour
         else if (Globals.chakramLevel == 2 && !spawnedSecondChakram)
         {
             float firstChakramAngle = chakram.GetComponent<OrbitingWeapon>().angle;
-            float secondChakramAngle = firstChakramAngle + 180;
+            float secondChakramAngle = 0;
+
+            if (firstChakramAngle == 0)
+            {
+                secondChakramAngle = 180;
+            } else 
+            {
+                if (firstChakramAngle > 0)
+                {
+                    secondChakramAngle = firstChakramAngle - 180;
+                } else
+                {
+                    secondChakramAngle = firstChakramAngle + 180;
+                }
+            }
             GameObject secondChakram = Instantiate(chakram, transform.position, Quaternion.identity);
             secondChakram.GetComponent<OrbitingWeapon>().player = gameObject.transform;
             secondChakram.GetComponent<OrbitingWeapon>().angle = secondChakramAngle;

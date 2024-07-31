@@ -1,4 +1,3 @@
-repository "NinjaCamel@massdigi@cloud"
+rep "NinjaCamel@massdigi@cloud"
   path "/"
-    smartbranch "/main/development/hareb" changeset "373"                                                                                                                                                                                                                                                                                                                     
-     
+    smartbranch "/main" changeset "384"          

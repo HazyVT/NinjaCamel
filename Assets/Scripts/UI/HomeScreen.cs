@@ -19,7 +19,9 @@ public class HomeScreen : MonoBehaviour
     }
     public void LoadCredits()
     {
+        audioManager.StopMusic();
         SceneManager.LoadScene("Credits");
+      
     }
 
 }

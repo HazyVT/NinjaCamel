@@ -5,7 +5,7 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource audioSource; // Reference to the AudioSource component
     public AudioClip mainMenuMusic;
-    public AudioClip gameplayMusic;
+
     public AudioClip transitionMusic;
 
     private void Awake()
@@ -32,34 +32,14 @@ public class AudioManager : MonoBehaviour
         audioSource.Play();
         Invoke("LoadGameScene", transitionMusic.length);
     }
+    
+    public void StopMusic()
+    {
+        audioSource.Stop();
+    }
 
     private void LoadGameScene()
     {
         SceneManager.LoadScene("SampleScene");
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "SampleScene")
-        {
-            PlayGameplayMusic();
-        }
-    }
-
-    public void PlayGameplayMusic()
-    {
-        audioSource.clip = gameplayMusic;
-        audioSource.loop = true; // Loop the gameplay music
-        audioSource.Play();
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the scene loaded event
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded; // Unsubscribe from the scene loaded event
     }
 }
