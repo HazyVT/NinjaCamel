@@ -9,6 +9,7 @@ public class changeImage : MonoBehaviour
     public Sprite OffImage;
     public Button button;
     private bool isOn = true; // to check whether the image has light or no 
+    public GameObject AudioManager;
 
     void Start()
     {
@@ -22,7 +23,8 @@ public class changeImage : MonoBehaviour
         {
             button.image.sprite = OffImage; //to change the button image to the "sound off" sprite
             isOn = false; // to turn off the sound
-            
+
+
         }
         else
         {

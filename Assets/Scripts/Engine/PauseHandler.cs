@@ -37,10 +37,10 @@ public class PauseHandler : MonoBehaviour
     void Start()
     {
         created = false;
-        Globals.hasChakram = true;
+        Globals.hasChakram = false;
         Globals.hasMelee = false;
         Globals.hasLightning = false;
-        Globals.chakramLevel = 1;
+        Globals.chakramLevel = 0;
         Globals.meleeLevel = 0;
         Globals.lightningLevel = 0;
         ExperienceManager.ResetExperienceManager();
@@ -136,7 +136,7 @@ public class PauseHandler : MonoBehaviour
                 chosen = "shuriken";
                 break;
             default:
-                txt = "Max level reached";
+                txt = "Damage Increase";
                 chosen = "";
                 break;
         }
@@ -162,7 +162,7 @@ public class PauseHandler : MonoBehaviour
                 txt  = "Make chakrams spin faster";
                 break;
             default:
-                txt = "Max level reached";
+                txt = "Damage Increase";
                 break;
         }
 
@@ -211,7 +211,7 @@ public class PauseHandler : MonoBehaviour
                 txt = "Make lightning attack strike twice";
                 break;
             default:
-                txt = "Max level reached";
+                txt = "Damage Increase";
                 break;
         }
 
@@ -226,7 +226,7 @@ public class PauseHandler : MonoBehaviour
         switch (choose)
         {
             case "shuriken":
-                if (Globals.shurikenLevel != Globals.shurikenMaxLevel) Globals.shurikenLevel++;
+                if (Globals.shurikenLevel != Globals.shurikenMaxLevel) ApplyShurikenUpgrade();
                 break;
             case "chakram":
                 if (Globals.chakramLevel != Globals.chakramMaxLevel) ApplyChakramUpgrade();
@@ -253,6 +253,15 @@ public class PauseHandler : MonoBehaviour
         created = false;
     }
 
+    private void ApplyShurikenUpgrade()
+    {
+        if (Globals.chakramLevel >= 4)
+        {
+            Globals.chakramDamage += 10;
+        }
+        Globals.shurikenLevel++;
+    }
+
     private void ApplyLightningUpgrade()
     {
         switch (Globals.lightningLevel)
@@ -266,6 +275,9 @@ public class PauseHandler : MonoBehaviour
                 break;
             case 2:
                 player.GetComponent<LightningWeaponScript>().times = 2;
+                break;
+            default:
+                Globals.lightningDamage += 10;
                 break;
         }
         //Globals.lightningDamage += 10;
@@ -285,6 +297,9 @@ public class PauseHandler : MonoBehaviour
         case 2:
             Globals.orbitSpeed = 100;
             Globals.chakramLevel++;
+            break;
+        default:
+            Globals.chakramDamage += 10;
             break;
        }
 
